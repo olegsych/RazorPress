@@ -24,6 +24,14 @@ namespace RazorPress
         }
 
         [Fact]
+        public void RenderReturnsEmptyStringGivenEmptyTemplateBecauseUserMayCreateAnEmptyFile()
+        {
+            var processor = new RazorProcessor();
+            string output = processor.Render(string.Empty, new Model());
+            Assert.Equal(string.Empty, output);
+        }
+       
+        [Fact]
         public void RenderUsesPageTemplateToProvideConveniencePropertiesToTemplateAuthors()
         {
             var processor = new RazorProcessor();

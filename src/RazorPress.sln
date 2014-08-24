@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Common.props = Common.props
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Console", "RazorPress.Console\RazorPress.Console.csproj", "{F57FEC59-93E5-44C5-958D-7EB95D339B34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Console.Tests", "RazorPress.Console.Tests\RazorPress.Console.Tests.csproj", "{4B4B3C86-C4FC-4D31-B79D-A229769ADABA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +30,14 @@ Global
 		{CBB99CD0-D69A-4159-88CA-3989CB506141}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBB99CD0-D69A-4159-88CA-3989CB506141}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBB99CD0-D69A-4159-88CA-3989CB506141}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F57FEC59-93E5-44C5-958D-7EB95D339B34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F57FEC59-93E5-44C5-958D-7EB95D339B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F57FEC59-93E5-44C5-958D-7EB95D339B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F57FEC59-93E5-44C5-958D-7EB95D339B34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B4B3C86-C4FC-4D31-B79D-A229769ADABA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B4B3C86-C4FC-4D31-B79D-A229769ADABA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B4B3C86-C4FC-4D31-B79D-A229769ADABA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B4B3C86-C4FC-4D31-B79D-A229769ADABA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

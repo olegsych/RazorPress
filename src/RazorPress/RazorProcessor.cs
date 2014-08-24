@@ -17,6 +17,11 @@ namespace RazorPress
 
         public string Render(string template, Model model)
         {
+            if (string.IsNullOrEmpty(template))
+            {
+                return string.Empty;
+            }
+
             return this.service.Parse(template, model, null, null);
         }
     }
