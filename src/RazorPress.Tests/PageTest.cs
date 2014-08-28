@@ -47,6 +47,32 @@ namespace RazorPress
             }
         }
 
+        public class Tags : PageTest
+        {
+            [Fact]
+            public void IsEmptyArrayByDefaultToPreventUsageErrors()
+            {
+                var page = new Page(new FileInfo(Path.GetRandomFileName()));
+                Assert.Equal(0, page.Tags.Length);
+            }
+
+            [Fact]
+            public void CanBeSetByUserToSpecifyTagsForPageOrPost()
+            {
+                var page = new Page(new FileInfo(Path.GetRandomFileName()));
+                var tags = new[] { "tag1", "tag2" };
+                page.Tags = tags;
+                Assert.Same(tags, page.Tags);
+            }
+
+            [Fact]
+            public void ThrowsArgumentNullExceptionToPreventUsageErrors()
+            {
+                var page = new Page(new FileInfo(Path.GetRandomFileName()));
+                Assert.Throws<ArgumentNullException>(() => page.Tags = null);
+            }
+        }
+
         public class Title : PageTest
         {
             [Fact]

@@ -28,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PageTest.cs" />
+    <Compile Include="TagTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

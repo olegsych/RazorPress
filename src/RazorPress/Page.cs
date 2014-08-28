@@ -10,6 +10,7 @@ namespace RazorPress
     {
         private readonly FileInfo sourceFile;
         private string content = string.Empty;
+        private string[] tags = new string[0];
         private string title = string.Empty;
 
         /// <summary>
@@ -43,6 +44,15 @@ namespace RazorPress
         }
 
         /// <summary>
+        /// Gets or sets the tags of this page.
+        /// </summary>
+        public string[] Tags
+        {
+            get { return this.tags; }
+            set { SetProperty(ref this.tags, value); }
+        }
+
+        /// <summary>
         /// Gets or sets the page title.
         /// </summary>
         /// <remarks>
@@ -54,7 +64,7 @@ namespace RazorPress
             set { SetProperty(ref this.title, value); }
         }
 
-        private static void SetProperty(ref string field, string value)
+        private static void SetProperty<T>(ref T field, T value) where T : class
         {
             if (value == null)
             {
