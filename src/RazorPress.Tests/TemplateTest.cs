@@ -1,4 +1,5 @@
-﻿using RazorEngine.Templating;
+﻿using System.IO;
+using RazorEngine.Templating;
 using Xunit;
 
 namespace RazorPress
@@ -20,10 +21,10 @@ namespace RazorPress
         [Fact]
         public void PageReturnsPageFromModelToAllowUsersReferencingItDirectly()
         {
-            var template = new Template();
-            template.Model = new Model();
-            Page page = template.Page;
-            Assert.Same(template.Model.Page, page);
+            var page = new Page(new FileInfo(Path.GetRandomFileName()));
+            var model = new Model(page);
+            var template = new Template { Model = model };
+            Assert.Same(page, template.Page);
         }
 
         [Fact]

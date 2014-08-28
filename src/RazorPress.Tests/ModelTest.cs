@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.IO;
+using Xunit;
 
 namespace RazorPress
 {
@@ -11,11 +12,11 @@ namespace RazorPress
         }
 
         [Fact]
-        public void PageIsNotNullSoThatUsersDontHaveToInitializeIt()
+        public void ConstructorInitializesPageProperty()
         {
-            var model = new Model();
-            Page page = model.Page;
-            Assert.NotNull(page);
+            var page = new Page(new FileInfo(Path.GetRandomFileName()));
+            var model = new Model(page);
+            Assert.Same(page, model.Page);
         }
 
         [Fact]

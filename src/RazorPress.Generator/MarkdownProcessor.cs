@@ -2,13 +2,13 @@
 
 namespace RazorPress.Generator
 {
-    internal class MarkdownProcessor
+    internal class MarkdownProcessor : IPageProcessor
     {
         private readonly Markdown markdown = new Markdown();
 
-        internal string Render(string template)
+        public void Process(Page page)
         {
-            return this.markdown.Transform(template);
+            page.Content = this.markdown.Transform(page.Content);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Xunit;
 
 namespace RazorPress.Generator
@@ -12,57 +13,67 @@ namespace RazorPress.Generator
         }
 
         [Fact]
-        public void RenderTransormsRazorTemplateWithTheSpecifiedModel()
+        public void ProcessTransormsContentOfGivenPage()
         {
-            var model = new Model();
-            model.Page.Title = "Hello, World";
+            var page = new Page(new FileInfo(Path.GetRandomFileName()));
+            page.Title = "Hello, World";
+            page.Content = "@Model.Page.Title";
 
             var processor = new RazorProcessor();
-            string output = processor.Render("@Model.Page.Title", model);
+            processor.Process(page);
             
-            Assert.Equal(model.Page.Title, output);
+            Assert.Equal(page.Title, page.Content);
         }
 
         [Fact]
-        public void RenderReturnsEmptyStringGivenEmptyTemplateBecauseUserMayCreateAnEmptyFile()
+        public void PageDoesNothingWithAnEmptyPageBecauseUserMayCreateAnEmptyFile()
         {
             var processor = new RazorProcessor();
-            string output = processor.Render(string.Empty, new Model());
-            Assert.Equal(string.Empty, output);
+
+            var page = new Page(new FileInfo(Path.GetRandomFileName()));
+            processor.Process(page);
+
+            Assert.Equal(string.Empty, page.Content);
         }
        
         [Fact]
-        public void RenderUsesPageTemplateToProvideConveniencePropertiesToTemplateAuthors()
+        public void ProcessUsesPageTemplateToProvideConveniencePropertiesToTemplateAuthors()
         {
             var processor = new RazorProcessor();
 
-            string output = processor.Render("@this.GetType().BaseType.Name", new Model());
+            var page = new Page(new FileInfo(Path.GetRandomFileName()));
+            page.Content = "@this.GetType().BaseType.Name";
+            processor.Process(page);
 
-            Assert.Equal(typeof(Template).Name, output);
+            Assert.Equal(typeof(Template).Name, page.Content);
         }
 
         [Fact]
-        public void RenderAllowsUsingPropertiesOfPageTemplateDirectlyInTemplateCode()
+        public void ProcessAllowsUsingPropertiesOfPageTemplateDirectlyInTemplateCode()
         {
-            var model = new Model();
-            model.Page.Title = "Test Page Title";
+            var page = new Page(new FileInfo(Path.GetRandomFileName()));
+            page.Title = "Test Page Title";
+            page.Content = "@this.Page.Title";
 
             var processor = new RazorProcessor();
-            string output = processor.Render("@this.Page.Title", model);
+            processor.Process(page);
 
-            Assert.Equal(model.Page.Title, output);
+            Assert.Equal(page.Title, page.Content);
         }
 
         [Fact]
-        public void RenderAllowsSettingPropertiesOfPageTemplateInTemplateCode()
+        public void ProcessAllowsSettingPropertiesOfPageTemplateInTemplateCode()
         {
             var processor = new RazorProcessor();
 
             const string expectedPageTitle = "Test Page Title";
-            var model = new Model();
-            processor.Render("@{ this.Page.Title = \"" + expectedPageTitle + "\"; }", model);
+            var page = new Page(new FileInfo(Path.GetRandomFileName()));
+            page.Title = "Test Page Title";
+            page.Content = "@{ this.Page.Title = \"" + expectedPageTitle + "\"; }";
 
-            Assert.Equal(expectedPageTitle, model.Page.Title);
+            processor.Process(page);
+
+            Assert.Equal(expectedPageTitle, page.Title);
         }
     }
 }

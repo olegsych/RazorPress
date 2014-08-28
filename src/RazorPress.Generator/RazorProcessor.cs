@@ -3,7 +3,7 @@ using RazorEngine.Templating;
 
 namespace RazorPress.Generator
 {
-    internal class RazorProcessor
+    internal class RazorProcessor : IPageProcessor
     {
         private readonly TemplateServiceConfiguration configuration;
         private readonly TemplateService service;
@@ -15,14 +15,15 @@ namespace RazorPress.Generator
             this.service = new TemplateService(configuration);
         }
 
-        public string Render(string template, Model model)
+        public void Process(Page page)
         {
-            if (string.IsNullOrEmpty(template))
-            {
-                return string.Empty;
-            }
+            string template = page.Content;
 
-            return this.service.Parse(template, model, null, null);
+            if (!string.IsNullOrEmpty(template))
+            {
+                var model = new Model(page);
+                page.Content = this.service.Parse(template, model, null, null);
+            }
         }
     }
 }

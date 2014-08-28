@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.IO;
+using Xunit;
 
 namespace RazorPress.Generator
 {
@@ -14,8 +15,10 @@ namespace RazorPress.Generator
         public void RenderConvertsMarkdownToHtml()
         {
             var processor = new MarkdownProcessor();
-            string output = processor.Render("# Header");
-            Assert.Equal("<h1>Header</h1>", output.TrimEnd());
+            var page = new Page(new FileInfo(Path.GetRandomFileName()));
+            page.Content = "# Header";
+            processor.Process(page);
+            Assert.Equal("<h1>Header</h1>", page.Content.TrimEnd());
         }
     }
 }

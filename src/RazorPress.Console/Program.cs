@@ -18,10 +18,11 @@ namespace RazorPress
             string inputFile, 
             string outputFile)
         {
-            string input = File.ReadAllText(inputFile);
+            var page = new Page(new FileInfo(inputFile));
+            page.Content = File.ReadAllText(inputFile);
             var razor = new RazorProcessor();
-            string output = razor.Render(input, new Model());
-            File.WriteAllText(outputFile, output);
+            razor.Process(page);
+            File.WriteAllText(outputFile, page.Content);
         }
     }
 }

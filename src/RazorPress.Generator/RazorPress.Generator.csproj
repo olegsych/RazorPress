@@ -27,6 +27,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPageProcessor.cs" />
     <Compile Include="MarkdownProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RazorProcessor.cs" />
