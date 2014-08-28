@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace RazorPress
+namespace RazorPress.Generator
 {
     public class RazorProcessorTest
     {

@@ -3,35 +3,38 @@
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="..\Common.props" />
   <PropertyGroup>
-    <ProjectGuid>{F57FEC59-93E5-44C5-958D-7EB95D339B34}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{1960F7D8-82B3-45F3-9A61-96DF62639A47}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>RazorPress.Console</AssemblyName>
+    <RootNamespace>RazorPress.Generator</RootNamespace>
+    <AssemblyName>RazorPress.Generator</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
   <ItemGroup>
-    <Reference Include="CLAP">
-      <HintPath>..\packages\CLAP.4.5\lib\net35\CLAP.dll</HintPath>
+    <Reference Include="MarkdownDeep">
+      <HintPath>..\packages\MarkdownDeep.NET.1.5\lib\.NetFramework 3.5\MarkdownDeep.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="MarkdownProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RazorProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RazorPress.Generator\RazorPress.Generator.csproj">
-      <Project>{1960f7d8-82b3-45f3-9a61-96df62639a47}</Project>
-      <Name>RazorPress.Generator</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RazorPress\RazorPress.csproj">
       <Project>{d7217af4-da86-43c2-becd-1eb2928840a2}</Project>
       <Name>RazorPress</Name>

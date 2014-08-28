@@ -2,20 +2,28 @@
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\xunit.core.2.0.0-beta4-build2738\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid\xunit.core.props" Condition="Exists('..\packages\xunit.core.2.0.0-beta4-build2738\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid\xunit.core.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <Import Project="..\Common.props" />
+  <Import Project="..\Common.props"/>
   <PropertyGroup>
-    <ProjectGuid>{4B4B3C86-C4FC-4D31-B79D-A229769ADABA}</ProjectGuid>
+    <ProjectGuid>{853C5BC3-BC62-4CEC-8A34-3C9B7332F9F7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>RazorPress.Console.Tests</AssemblyName>
+    <RootNamespace>RazorPress.Generator</RootNamespace>
+    <AssemblyName>RazorPress.Generator.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>baa916f4</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>a6c8f5fb</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
   <ItemGroup>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="xunit.abstractions">
       <HintPath>..\packages\xunit.abstractions.2.0.0-beta4-build2738\lib\net35\xunit.abstractions.dll</HintPath>
     </Reference>
@@ -27,15 +35,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProgramTest.cs" />
+    <Compile Include="MarkdownProcessorTest.cs" />
+    <Compile Include="RazorProcessorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RazorPress.Console\RazorPress.Console.csproj">
-      <Project>{f57fec59-93e5-44c5-958d-7eb95d339b34}</Project>
-      <Name>RazorPress.Console</Name>
+    <ProjectReference Include="..\RazorPress.Generator\RazorPress.Generator.csproj">
+      <Project>{1960f7d8-82b3-45f3-9a61-96df62639a47}</Project>
+      <Name>RazorPress.Generator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RazorPress\RazorPress.csproj">
+      <Project>{d7217af4-da86-43c2-becd-1eb2928840a2}</Project>
+      <Name>RazorPress</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

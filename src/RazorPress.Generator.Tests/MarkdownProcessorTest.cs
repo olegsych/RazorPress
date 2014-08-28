@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace RazorPress
+namespace RazorPress.Generator
 {
     public class MarkdownProcessorTest
     {

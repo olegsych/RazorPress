@@ -1,7 +1,7 @@
 ﻿using RazorEngine.Configuration;
 using RazorEngine.Templating;
 
-namespace RazorPress
+namespace RazorPress.Generator
 {
     internal class RazorProcessor
     {
