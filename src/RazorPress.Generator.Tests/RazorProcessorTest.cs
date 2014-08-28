@@ -45,7 +45,7 @@ namespace RazorPress.Generator
             page.Content = "@this.GetType().BaseType.Name";
             processor.Process(page);
 
-            Assert.Equal(typeof(Template).Name, page.Content);
+            Assert.Equal(typeof(RazorTemplate).Name, page.Content);
         }
 
         [Fact]

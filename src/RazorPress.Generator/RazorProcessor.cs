@@ -11,7 +11,7 @@ namespace RazorPress.Generator
         public RazorProcessor()
         {
             this.configuration = new TemplateServiceConfiguration();
-            this.configuration.BaseTemplateType = typeof(Template);
+            this.configuration.BaseTemplateType = typeof(RazorTemplate);
             this.service = new TemplateService(configuration);
         }
 
@@ -21,7 +21,7 @@ namespace RazorPress.Generator
 
             if (!string.IsNullOrEmpty(template))
             {
-                var model = new Model(page);
+                var model = new RazorTemplateModel(page);
                 page.Content = this.service.Parse(template, model, null, null);
             }
         }

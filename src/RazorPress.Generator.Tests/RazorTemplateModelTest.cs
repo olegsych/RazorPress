@@ -1,28 +1,28 @@
 ﻿using System.IO;
 using Xunit;
 
-namespace RazorPress
+namespace RazorPress.Generator
 {
-    public class ModelTest
+    public class RazorTemplateModelTest
     {
         [Fact]
         public void ClassIsPublicToAllowPageTemplateToBePublic()
         {
-            Assert.True(typeof(Model).IsPublic);
+            Assert.True(typeof(RazorTemplateModel).IsPublic);
         }
 
         [Fact]
         public void ConstructorInitializesPageProperty()
         {
             var page = new Page(new FileInfo(Path.GetRandomFileName()));
-            var model = new Model(page);
+            var model = new RazorTemplateModel(page);
             Assert.Same(page, model.Page);
         }
 
         [Fact]
         public void PageIsReadOnlyBecauseUsersShouldtBeAbleToReplaceIt()
         {
-            Assert.Null(typeof(Model).GetProperty("Page").SetMethod);
+            Assert.Null(typeof(RazorTemplateModel).GetProperty("Page").SetMethod);
         }
     }
 }
