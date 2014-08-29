@@ -8,7 +8,7 @@ namespace RazorPress
     /// </summary>
     public class Page
     {
-        private readonly FileInfo sourceFile;
+        private readonly FileInfo source;
         private string content = string.Empty;
         private string[] tags = new string[0];
         private string title = string.Empty;
@@ -16,14 +16,14 @@ namespace RazorPress
         /// <summary>
         /// Initializes a new instance of the <see cref="Page"/> class.
         /// </summary>
-        public Page(FileInfo sourceFile)
+        public Page(FileInfo source)
         {
-            if (sourceFile == null)
+            if (source == null)
             {
                 throw new ArgumentNullException("sourceFile");
             }
 
-            this.sourceFile = sourceFile;
+            this.source = source;
         }
 
         /// <summary>
@@ -38,9 +38,9 @@ namespace RazorPress
         /// <summary>
         /// Gets the source file of this page.
         /// </summary>
-        public FileInfo SourceFile
+        public FileInfo Source
         {
-            get { return this.sourceFile; }
+            get { return this.source; }
         }
 
         /// <summary>

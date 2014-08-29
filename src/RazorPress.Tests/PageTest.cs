@@ -99,20 +99,20 @@ namespace RazorPress
             }
         }
 
-        public class SourceFile : PageTest
+        public class Source : PageTest
         {
             [Fact]
             public void IsInitializedByConstructor()
             {
                 var sourceFile = new FileInfo(Path.GetRandomFileName());
                 var page = new Page(sourceFile);
-                Assert.Same(sourceFile, page.SourceFile);
+                Assert.Same(sourceFile, page.Source);
             }
 
             [Fact]
             public void IsReadOnlyBecauseItCannotBeChangedByUsers()
             {
-                Assert.Null(typeof(Page).GetProperty("SourceFile").SetMethod);
+                Assert.Null(typeof(Page).GetProperty("Source").SetMethod);
             }
         }
     }
