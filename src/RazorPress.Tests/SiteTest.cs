@@ -1,42 +1,76 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using Xunit;
 
 namespace RazorPress
 {
     public class SiteTest
     {
-        [Fact]
-        public void ClassIsPublicForCustomersToUseInTheirTemplates()
+        public class Class : SiteTest
         {
-            Assert.True(typeof(Site).IsPublic);
+            [Fact]
+            public void IsPublicForCustomersToUseInTheirTemplates()
+            {
+                Assert.True(typeof(Site).IsPublic);
+            }
+
+            [Fact]
+            public void ThrowsArgumentExceptionToPreventUsageErrors()
+            {
+                Assert.Throws<ArgumentNullException>(() => new Site(null));
+            }
         }
 
-        [Fact]
-        public void PagesIsNotNullByDefaultToPreventUsageErrors()
+        public class Pages : SiteTest
         {
-            var site = new Site();
-            IList<Page> pages = site.Pages;
-            Assert.NotNull(pages);
+            [Fact]
+            public void PagesIsNotNullByDefaultToPreventUsageErrors()
+            {
+                var site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+                IList<Page> pages = site.Pages;
+                Assert.NotNull(pages);
+            }
+
+            [Fact]
+            public void PagesIsReadOnlyBecauseListItReturnsCanBeModified()
+            {
+                Assert.Null(typeof(Site).GetProperty("Pages").SetMethod);
+            }
         }
 
-        [Fact]
-        public void PagesIsReadOnlyBecauseListItReturnsCanBeModified()
+        public class Source : SiteTest
         {
-            Assert.Null(typeof(Site).GetProperty("Pages").SetMethod);
+            [Fact]
+            public void IsInitializedByConstructor()
+            {
+                var source = new DirectoryInfo(Path.GetRandomFileName());
+                var site = new Site(source);
+                Assert.Same(source, site.Source);
+            }
+
+            [Fact]
+            public void IsReadOnlyAndShouldNotBeChanged()
+            {
+                Assert.Null(typeof(Site).GetProperty("Source").SetMethod);
+            }
         }
 
-        [Fact]
-        public void TagsIsNotNullByDefaultToPreventUsageErrors()
+        public class Tags : SiteTest
         {
-            var site = new Site();
-            IList<Tag> tags = site.Tags;
-            Assert.NotNull(tags);
-        }
+            [Fact]
+            public void TagsIsNotNullByDefaultToPreventUsageErrors()
+            {
+                var site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+                IList<Tag> tags = site.Tags;
+                Assert.NotNull(tags);
+            }
 
-        [Fact]
-        public void TagsIsReadOnlyBecauseListItReturnsCanBeModified()
-        {
-            Assert.Null(typeof(Site).GetProperty("Tags").SetMethod);
+            [Fact]
+            public void TagsIsReadOnlyBecauseListItReturnsCanBeModified()
+            {
+                Assert.Null(typeof(Site).GetProperty("Tags").SetMethod);
+            }
         }
     }
 }
