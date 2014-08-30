@@ -6,9 +6,6 @@
   <PropertyGroup>
     <ProjectGuid>{853C5BC3-BC62-4CEC-8A34-3C9B7332F9F7}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>a6c8f5fb</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
@@ -37,6 +34,7 @@
     <Compile Include="RazorTemplateModelTest.cs" />
     <Compile Include="RazorProcessorTest.cs" />
     <Compile Include="RazorTemplateTest.cs" />
+    <Compile Include="SourceFileProcessorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
