@@ -22,14 +22,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command.cs" />
     <Compile Include="IPageProcessor.cs" />
-    <Compile Include="ISiteProcessor.cs" />
     <Compile Include="MarkdownProcessor.cs" />
     <Compile Include="RazorTemplateModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RazorProcessor.cs" />
     <Compile Include="RazorTemplate.cs" />
-    <Compile Include="SourceFileProcessor.cs" />
+    <Compile Include="CollecSourceFiles.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

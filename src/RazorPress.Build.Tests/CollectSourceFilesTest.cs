@@ -6,11 +6,11 @@
     using System.Linq;
     using Xunit;
 
-    public class SourceFileProcessorTest : IDisposable
+    public class CollectSourceFilesTest : IDisposable
     {
         private DirectoryInfo directory;
 
-        public SourceFileProcessorTest()
+        public CollectSourceFilesTest()
         {
             this.directory = new DirectoryInfo(Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()));
         }
@@ -24,26 +24,26 @@
         }
 
         [Fact]
-        public void ClassIsInternalAndNotMeantToBeAccessedByUsers()
+        public void ClassIsPublicForDocumentationAndExtensibility()
         {
-            Assert.False(typeof(SourceFileProcessor).IsPublic);
+            Assert.True(typeof(CollecSourceFiles).IsPublic);
         }
 
         [Fact]
-        public void ClassImplementsISiteProcessorInterfaceForCompatibilityWithOtherSiteProcessors()
+        public void ClassInheritsFromCommandForCompatibilityWithOtherSiteProcessors()
         {
-            Assert.True(typeof(ISiteProcessor).IsAssignableFrom(typeof(SourceFileProcessor)));
+            Assert.True(typeof(Command).IsAssignableFrom(typeof(CollecSourceFiles)));
         }
 
         [Fact]
-        public void ProcessThrowsArgumentNullExceptionToPreventUsageErrors()
+        public void ExecuteInvokesBaseMethodForConsistentErrorHandling()
         {
-            var processor = new SourceFileProcessor();
-            Assert.Throws<ArgumentNullException>(() => processor.Process(null));
+            var processor = new CollecSourceFiles();
+            Assert.Throws<InvalidOperationException>(() => processor.Execute());
         }
 
         [Fact]
-        public void ProcessCreatesPageObjectsForEachFileInSiteSourceDirectory()
+        public void ExecuteCreatesPageObjectsForEachFileInSiteSourceDirectory()
         {
             this.directory.Create();
             var files = new List<FileInfo>
@@ -54,14 +54,14 @@
             files.ForEach(file => file.Create().Dispose());
             var site = new Site(this.directory);
 
-            var processor = new SourceFileProcessor();
-            processor.Process(site);
+            var processor = new CollecSourceFiles { Site = site };
+            processor.Execute();
 
             Assert.Equal(files.Select(f => f.FullName), site.Pages.Select(p => p.Source.FullName));
         }
 
         [Fact]
-        public void ProcessCreatePageObjectsForFilesInSubdirectoriesOfSourceDirectory()
+        public void ExecuteCreatePageObjectsForFilesInSubdirectoriesOfSourceDirectory()
         {
             this.directory.Create();
             DirectoryInfo subDirectory = this.directory.CreateSubdirectory("SubDirectory");
@@ -73,8 +73,8 @@
             files.ForEach(file => file.Create().Dispose());
             var site = new Site(this.directory);
 
-            var processor = new SourceFileProcessor();
-            processor.Process(site);
+            var processor = new CollecSourceFiles { Site = site };
+            processor.Execute();
 
             Assert.Equal(files.Select(f => f.FullName), site.Pages.Select(p => p.Source.FullName));
         }

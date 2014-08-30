@@ -34,7 +34,8 @@
     <Compile Include="RazorTemplateModelTest.cs" />
     <Compile Include="RazorProcessorTest.cs" />
     <Compile Include="RazorTemplateTest.cs" />
-    <Compile Include="SourceFileProcessorTest.cs" />
+    <Compile Include="CollectSourceFilesTest.cs" />
+    <Compile Include="CommandTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
