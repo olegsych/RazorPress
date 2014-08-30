@@ -3,6 +3,10 @@ using System.IO;
 
 namespace RazorPress.Generator
 {
+    /// <summary>
+    /// Responsible for discovering source files in a directory and populating the <see cref="Site"/> model
+    /// with <see cref="Page"/> objects.
+    /// </summary>
     internal class SourceFileProcessor : ISiteProcessor
     {
         public void Process(Site site)
