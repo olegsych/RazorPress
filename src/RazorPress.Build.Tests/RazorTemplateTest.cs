@@ -2,7 +2,7 @@
 using RazorEngine.Templating;
 using Xunit;
 
-namespace RazorPress.Generator
+namespace RazorPress.Build
 {
     public class RazorTemplateTest
     {

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using CLAP;
 using CLAP.Validation;
-using RazorPress.Generator;
+using RazorPress.Build;
 
 namespace RazorPress.Console
 {

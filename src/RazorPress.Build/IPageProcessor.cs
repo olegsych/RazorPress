@@ -1,4 +1,4 @@
-﻿namespace RazorPress.Generator
+﻿namespace RazorPress.Build
 {
     interface IPageProcessor
     {

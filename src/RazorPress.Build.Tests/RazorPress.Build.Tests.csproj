@@ -37,12 +37,14 @@
     <Compile Include="SourceFileProcessorTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RazorPress.Generator\RazorPress.Generator.csproj">
+    <ProjectReference Include="..\RazorPress.Build\RazorPress.Build.csproj">
       <Project>{1960f7d8-82b3-45f3-9a61-96df62639a47}</Project>
-      <Name>RazorPress.Generator</Name>
+      <Name>RazorPress.Build</Name>
     </ProjectReference>
     <ProjectReference Include="..\RazorPress\RazorPress.csproj">
       <Project>{d7217af4-da86-43c2-becd-1eb2928840a2}</Project>

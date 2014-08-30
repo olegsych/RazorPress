@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace RazorPress.Generator
+namespace RazorPress.Build
 {
     /// <summary>
     /// Responsible for discovering source files in a directory and populating the <see cref="Site"/> model

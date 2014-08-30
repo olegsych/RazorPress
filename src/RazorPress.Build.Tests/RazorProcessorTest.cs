@@ -2,7 +2,7 @@
 using System.IO;
 using Xunit;
 
-namespace RazorPress.Generator
+namespace RazorPress.Build
 {
     public class RazorProcessorTest
     {

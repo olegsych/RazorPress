@@ -1,4 +1,4 @@
-﻿namespace RazorPress.Generator
+﻿namespace RazorPress.Build
 {
     /// <summary>
     /// Serves as a model for <see cref="RazorTemplate"/>.

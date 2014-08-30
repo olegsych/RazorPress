@@ -1,6 +1,6 @@
 ﻿using MarkdownDeep;
 
-namespace RazorPress.Generator
+namespace RazorPress.Build
 {
     internal class MarkdownProcessor : IPageProcessor
     {

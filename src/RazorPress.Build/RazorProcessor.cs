@@ -2,7 +2,7 @@
 using RazorEngine.Configuration;
 using RazorEngine.Templating;
 
-namespace RazorPress.Generator
+namespace RazorPress.Build
 {
     internal class RazorProcessor : IPageProcessor
     {

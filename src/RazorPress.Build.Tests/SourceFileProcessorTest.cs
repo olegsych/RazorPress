@@ -1,4 +1,4 @@
-﻿namespace RazorPress.Generator
+﻿namespace RazorPress.Build
 {
     using System;
     using System.Collections.Generic;

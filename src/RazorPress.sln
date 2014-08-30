@@ -16,9 +16,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Console", "Razor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Console.Tests", "RazorPress.Console.Tests\RazorPress.Console.Tests.csproj", "{4B4B3C86-C4FC-4D31-B79D-A229769ADABA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Generator", "RazorPress.Generator\RazorPress.Generator.csproj", "{1960F7D8-82B3-45F3-9A61-96DF62639A47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Build", "RazorPress.Build\RazorPress.Build.csproj", "{1960F7D8-82B3-45F3-9A61-96DF62639A47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Generator.Tests", "RazorPress.Generator.Tests\RazorPress.Generator.Tests.csproj", "{853C5BC3-BC62-4CEC-8A34-3C9B7332F9F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Build.Tests", "RazorPress.Build.Tests\RazorPress.Build.Tests.csproj", "{853C5BC3-BC62-4CEC-8A34-3C9B7332F9F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
