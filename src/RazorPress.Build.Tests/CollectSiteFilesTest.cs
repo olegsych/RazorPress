@@ -6,11 +6,11 @@
     using System.Linq;
     using Xunit;
 
-    public class CollectSourceFilesTest : IDisposable
+    public class CollectSiteFilesTest : IDisposable
     {
         private DirectoryInfo directory;
 
-        public CollectSourceFilesTest()
+        public CollectSiteFilesTest()
         {
             this.directory = new DirectoryInfo(Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()));
         }
@@ -26,19 +26,19 @@
         [Fact]
         public void ClassIsPublicForDocumentationAndExtensibility()
         {
-            Assert.True(typeof(CollecSourceFiles).IsPublic);
+            Assert.True(typeof(CollectSiteFiles).IsPublic);
         }
 
         [Fact]
         public void ClassInheritsFromCommandForCompatibilityWithOtherSiteProcessors()
         {
-            Assert.True(typeof(Command).IsAssignableFrom(typeof(CollecSourceFiles)));
+            Assert.True(typeof(Command).IsAssignableFrom(typeof(CollectSiteFiles)));
         }
 
         [Fact]
         public void ExecuteInvokesBaseMethodForConsistentErrorHandling()
         {
-            var processor = new CollecSourceFiles();
+            var processor = new CollectSiteFiles();
             Assert.Throws<InvalidOperationException>(() => processor.Execute());
         }
 
@@ -54,7 +54,7 @@
             files.ForEach(file => file.Create().Dispose());
             var site = new Site(this.directory);
 
-            var processor = new CollecSourceFiles { Site = site };
+            var processor = new CollectSiteFiles { Site = site };
             processor.Execute();
 
             Assert.Equal(files.Select(f => f.FullName), site.Pages.Select(p => p.Source.FullName));
@@ -73,7 +73,7 @@
             files.ForEach(file => file.Create().Dispose());
             var site = new Site(this.directory);
 
-            var processor = new CollecSourceFiles { Site = site };
+            var processor = new CollectSiteFiles { Site = site };
             processor.Execute();
 
             Assert.Equal(files.Select(f => f.FullName), site.Pages.Select(p => p.Source.FullName));

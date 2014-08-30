@@ -36,6 +36,14 @@ namespace RazorPress.Build
         }
 
         [Fact]
+        public void ExecuteDoesNotThrowExceptionsWhenAllInputPropertiesAreInitialized()
+        {
+            var command = new TestableCommand();
+            command.Site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+            command.Execute(); // without exceptions
+        }
+
+        [Fact]
         public void ExecuteMethodIsVirtualForDerivedClassesToImplementActualLogic()
         {
             Assert.True(typeof(Command).GetMethod("Execute").IsVirtual);

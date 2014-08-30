@@ -7,7 +7,7 @@ namespace RazorPress.Build
     /// Responsible for discovering source files in a directory and populating the <see cref="Site"/> model
     /// with <see cref="Page"/> objects.
     /// </summary>
-    public class CollecSourceFiles : Command
+    public class CollectSiteFiles : Command
     {
         /// <summary>
         /// Populates the <see cref="Site"/> with <see cref="Page"/> objects representing files in the source directory of a web site.

@@ -30,11 +30,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MarkdownProcessorTest.cs" />
+    <Compile Include="TransformMarkdownPageTest.cs" />
+    <Compile Include="PageCommandTest.cs" />
     <Compile Include="RazorTemplateModelTest.cs" />
-    <Compile Include="RazorProcessorTest.cs" />
+    <Compile Include="TransformRazorPageTest.cs" />
     <Compile Include="RazorTemplateTest.cs" />
-    <Compile Include="CollectSourceFilesTest.cs" />
+    <Compile Include="CollectSiteFilesTest.cs" />
     <Compile Include="CommandTest.cs" />
   </ItemGroup>
   <ItemGroup>
