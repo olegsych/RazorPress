@@ -1,4 +1,5 @@
-﻿using RazorEngine.Configuration;
+﻿using System.IO;
+using RazorEngine.Configuration;
 using RazorEngine.Templating;
 
 namespace RazorPress.Generator
@@ -21,7 +22,8 @@ namespace RazorPress.Generator
 
             if (!string.IsNullOrEmpty(template))
             {
-                var model = new RazorTemplateModel(page);
+                // TODO: Change RazorProcessor to support Site.
+                var model = new RazorTemplateModel(new Site(new DirectoryInfo(Path.GetRandomFileName())), page);
                 page.Content = this.service.Parse(template, model, null, null);
             }
         }

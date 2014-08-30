@@ -6,31 +6,57 @@ namespace RazorPress.Generator
 {
     public class RazorTemplateTest
     {
-        [Fact]
-        public void ClassIsPublicToServeAsBaseClassOfTemplatesCreatedByUsers()
+        public class Class : RazorTemplateTest
         {
-            Assert.True(typeof(RazorTemplate).IsPublic);
+            [Fact]
+            public void IsPublicToServeAsBaseClassOfTemplatesCreatedByUsers()
+            {
+                Assert.True(typeof(RazorTemplate).IsPublic);
+            }
+
+            [Fact]
+            public void InheritsFromTemplateBaseOfPageModelToAllowUsersAccessPageModelInTheirTemplates()
+            {
+                Assert.True(typeof(TemplateBase<RazorTemplateModel>).IsAssignableFrom(typeof(RazorTemplate)));
+            }
         }
 
-        [Fact]
-        public void ClassInheritsFromTemplateBaseOfPageModelToAllowUsersAccessPageModelInTheirTemplates()
+        public class PageTest : RazorTemplateTest
         {
-            Assert.True(typeof(TemplateBase<RazorTemplateModel>).IsAssignableFrom(typeof(RazorTemplate)));
+            [Fact]
+            public void ReturnsPageFromModelToAllowUsersReferencingItDirectly()
+            {
+                var site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+                var page = new Page(new FileInfo(Path.GetRandomFileName()));
+                var model = new RazorTemplateModel(site, page);
+                var template = new RazorTemplate { Model = model };
+                Assert.Same(page, template.Page);
+            }
+
+            [Fact]
+            public void IsReadOnlyBecauseUsersDontNeedToSetItInTemplates()
+            {
+                Assert.Null(typeof(RazorTemplate).GetProperty("Page").SetMethod);
+            }
         }
 
-        [Fact]
-        public void PageReturnsPageFromModelToAllowUsersReferencingItDirectly()
+        public class SiteTest : RazorTemplateTest
         {
-            var page = new Page(new FileInfo(Path.GetRandomFileName()));
-            var model = new RazorTemplateModel(page);
-            var template = new RazorTemplate { Model = model };
-            Assert.Same(page, template.Page);
-        }
+            [Fact]
+            public void ReturnsSiteFromModelToAllowUsersReferencingItDirectly()
+            {
+                var site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+                var page = new Page(new FileInfo(Path.GetRandomFileName()));
+                var model = new RazorTemplateModel(site, page);
+                var template = new RazorTemplate { Model = model };
+                Assert.Same(site, template.Site);
+            }
 
-        [Fact]
-        public void PageIsReadOnlyBecauseUsersDontNeedToSetItInTemplates()
-        {
-            Assert.Null(typeof(RazorTemplate).GetProperty("Page").SetMethod);
+            [Fact]
+            public void IsReadOnlyBecauseUsersDontNeedToSetItInTemplates()
+            {
+                Assert.Null(typeof(RazorTemplate).GetProperty("Site").SetMethod);
+            }
         }
     }
 }

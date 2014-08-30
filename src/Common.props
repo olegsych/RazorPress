@@ -3,7 +3,9 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <RootNamespace>RazorPress</RootNamespace>
+    <IsTestProject>$(MSBuildProjectName.EndsWith('.Tests'))</IsTestProject>
+    <RootNamespace>$(MSBuildProjectName)</RootNamespace>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <ErrorReport>prompt</ErrorReport>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -19,5 +21,6 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile Condition="'$(IsTestProject)' != 'true'">$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 </Project>

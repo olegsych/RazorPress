@@ -3,7 +3,7 @@ using CLAP;
 using CLAP.Validation;
 using RazorPress.Generator;
 
-namespace RazorPress
+namespace RazorPress.Console
 {
     internal class Program
     {

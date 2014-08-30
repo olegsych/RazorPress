@@ -2,7 +2,7 @@
 using System.IO;
 using Xunit;
 
-namespace RazorPress.Tests
+namespace RazorPress.Console
 {
     public sealed class ProgramTest : IDisposable
     {

@@ -14,5 +14,13 @@ namespace RazorPress.Generator
         {
             get { return this.Model.Page; }
         }
+
+        /// <summary>
+        /// Gets the <see cref="Site"/> object representing the web site being generated.
+        /// </summary>
+        public Site Site 
+        {
+            get { return this.Model.Site; }            
+        }
     }
 }

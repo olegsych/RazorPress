@@ -12,17 +12,25 @@ namespace RazorPress.Generator
         }
 
         [Fact]
-        public void ConstructorInitializesPageProperty()
+        public void ConstructorInitializesPropertyValues()
         {
+            var site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
             var page = new Page(new FileInfo(Path.GetRandomFileName()));
-            var model = new RazorTemplateModel(page);
+            var model = new RazorTemplateModel(site, page);
+            Assert.Same(site, model.Site);
             Assert.Same(page, model.Page);
         }
 
         [Fact]
-        public void PageIsReadOnlyBecauseUsersShouldtBeAbleToReplaceIt()
+        public void PageIsReadOnlyBecauseUsersShouldNotBeReplacingIt()
         {
             Assert.Null(typeof(RazorTemplateModel).GetProperty("Page").SetMethod);
+        }
+
+        [Fact]
+        public void SiteIsReadOnlyBecauseUsersShouldNotBeReplacingIt()
+        {
+            Assert.Null(typeof(RazorTemplateModel).GetProperty("Site").SetMethod);
         }
     }
 }

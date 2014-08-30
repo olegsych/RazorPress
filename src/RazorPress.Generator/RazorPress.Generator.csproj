@@ -6,8 +6,6 @@
     <ProjectGuid>{1960F7D8-82B3-45F3-9A61-96DF62639A47}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RazorPress.Generator</RootNamespace>
-    <AssemblyName>RazorPress.Generator</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

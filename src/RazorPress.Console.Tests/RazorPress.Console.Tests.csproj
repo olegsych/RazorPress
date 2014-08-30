@@ -7,7 +7,6 @@
     <ProjectGuid>{4B4B3C86-C4FC-4D31-B79D-A229769ADABA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>RazorPress.Console.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>baa916f4</NuGetPackageImportStamp>
