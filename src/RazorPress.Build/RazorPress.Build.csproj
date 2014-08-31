@@ -25,7 +25,7 @@
     <Compile Include="Command.cs" />
     <Compile Include="GenerateSiteTags.cs" />
     <Compile Include="RazorPageCommand.cs" />
-    <Compile Include="ReadRazorPageHeader.cs" />
+    <Compile Include="ExecuteRazorPageHeader.cs" />
     <Compile Include="TransformMarkdownPage.cs" />
     <Compile Include="PageCommand.cs" />
     <Compile Include="RazorTemplateModel.cs" />

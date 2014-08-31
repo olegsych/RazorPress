@@ -32,7 +32,7 @@
   <ItemGroup>
     <Compile Include="GenerateSiteTagsTest.cs" />
     <Compile Include="RazorPageCommandTest.cs" />
-    <Compile Include="ReadRazorPageHeaderTest.cs" />
+    <Compile Include="ExecuteRazorPageHeaderTest.cs" />
     <Compile Include="TransformMarkdownPageTest.cs" />
     <Compile Include="PageCommandTest.cs" />
     <Compile Include="RazorTemplateModelTest.cs" />

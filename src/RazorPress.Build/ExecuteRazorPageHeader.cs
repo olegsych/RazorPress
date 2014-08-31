@@ -7,7 +7,7 @@ namespace RazorPress.Build
     /// <summary>
     /// Updates <see cref="Page"/> properties from its header section.
     /// </summary>
-    public class ReadRazorPageHeader : RazorPageCommand
+    public class ExecuteRazorPageHeader : RazorPageCommand
     {
         /// <summary>
         /// Executes the header section of a Razor page to read page properties before further processing.

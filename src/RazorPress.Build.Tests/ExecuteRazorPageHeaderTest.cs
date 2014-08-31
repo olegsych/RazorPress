@@ -4,24 +4,24 @@ using Xunit;
 
 namespace RazorPress.Build
 {
-    public class ReadRazorPageHeaderTest
+    public class ExecuteRazorPageHeaderTest
     {
         [Fact]
         public void ClassIsPublicForDocumentationAndExtensibility()
         {
-            Assert.True(typeof(ReadRazorPageHeader).IsPublic);
+            Assert.True(typeof(ExecuteRazorPageHeader).IsPublic);
         }
 
         [Fact]
         public void ClassInheritsFromRazorPageCommandForCodeReuseAndPolimorphism()
         {
-            Assert.True(typeof(RazorPageCommand).IsAssignableFrom(typeof(ReadRazorPageHeader)));
+            Assert.True(typeof(RazorPageCommand).IsAssignableFrom(typeof(ExecuteRazorPageHeader)));
         }
 
         [Fact]
         public void ExecuteRendersHeaderSectionOfRazorTemplateToInitializePageProperties()
         {
-            var command = new ReadRazorPageHeader();
+            var command = new ExecuteRazorPageHeader();
             command.Site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
             command.Page = new Page(new FileInfo(Path.GetRandomFileName()))
             {
@@ -39,13 +39,13 @@ namespace RazorPress.Build
         [Fact]
         public void ExecuteOverridesMethodInheritedFromBaseClassForPolymorphism()
         {
-            Assert.Equal(typeof(Command).GetMethod("Execute"), typeof(ReadRazorPageHeader).GetMethod("Execute").GetBaseDefinition());
+            Assert.Equal(typeof(Command).GetMethod("Execute"), typeof(ExecuteRazorPageHeader).GetMethod("Execute").GetBaseDefinition());
         }
 
         [Fact]
         public void ExecuteCallsBaseMethodForConsistentErrorHandling()
         {
-            var command = new ReadRazorPageHeader();
+            var command = new ExecuteRazorPageHeader();
             Assert.Throws<InvalidOperationException>(() => command.Execute());
         }
     }
