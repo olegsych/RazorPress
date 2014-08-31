@@ -13,9 +13,9 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void ClassInheritsFromPageCommandForCodeReuseAndPolymorphism()
+        public void ClassInheritsFromRazorPageCommandForCodeReuseAndPolymorphism()
         {
-            Assert.True(typeof(PageCommand).IsAssignableFrom(typeof(TransformRazorPage)));
+            Assert.True(typeof(RazorPageCommand).IsAssignableFrom(typeof(TransformRazorPage)));
         }
 
         [Fact]
@@ -34,16 +34,17 @@ namespace RazorPress.Build
         [Fact]
         public void ExecuteTransformsContentOfGivenPage()
         {
-            var page = new Page(new FileInfo(Path.GetRandomFileName()));
-            page.Title = "Hello, World";
-            page.Content = "@Model.Page.Title";
-
             var command = new TransformRazorPage();
             command.Site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
-            command.Page = page;
+            command.Page = new Page(new FileInfo(Path.GetRandomFileName()))
+            {
+                Title = "Hello, World",
+                Content = "@Model.Page.Title",
+            };
+
             command.Execute();
             
-            Assert.Equal(page.Title, page.Content);
+            Assert.Equal(command.Page.Title, command.Page.Content);
         }
 
         [Fact]
@@ -56,53 +57,6 @@ namespace RazorPress.Build
             command.Execute();
 
             Assert.Equal(string.Empty, command.Page.Content);
-        }
-       
-        [Fact]
-        public void ExecutePassesSiteObjectToRazorTemplate()
-        {
-            var command = new TransformRazorPage();
-            command.Site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
-            command.Page = new Page(new FileInfo(Path.GetRandomFileName()))
-            {
-                Content = "@this.Site.GetHashCode().ToString()"
-            };
-
-            command.Execute();
-
-            Assert.Equal(command.Site.GetHashCode().ToString(), command.Page.Content);
-        }
-
-        [Fact]
-        public void ExecutePassesPageObjectToRazorTemplate()
-        {
-            var command = new TransformRazorPage();
-            command.Site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
-            command.Page = new Page(new FileInfo(Path.GetRandomFileName()))
-            {
-                Content = "@this.Page.GetHashCode().ToString()"
-            };
-
-            command.Execute();
-
-            Assert.Equal(command.Page.GetHashCode().ToString(), command.Page.Content);
-        }
-
-        [Fact]
-        public void ExecuteAllowsSettingPropertiesOfPageTemplateInTemplateCode()
-        {
-            const string expectedPageTitle = "Test Page Title";
-            var page = new Page(new FileInfo(Path.GetRandomFileName()));
-            page.Title = "Test Page Title";
-            page.Content = "@{ this.Page.Title = \"" + expectedPageTitle + "\"; }";
-
-            var command = new TransformRazorPage();
-            command.Site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
-            command.Page = page;
-
-            command.Execute();
-
-            Assert.Equal(expectedPageTitle, page.Title);
-        }
+        }       
     }
 }

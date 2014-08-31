@@ -30,6 +30,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RazorPageCommandTest.cs" />
+    <Compile Include="ReadRazorPageHeaderTest.cs" />
     <Compile Include="TransformMarkdownPageTest.cs" />
     <Compile Include="PageCommandTest.cs" />
     <Compile Include="RazorTemplateModelTest.cs" />
