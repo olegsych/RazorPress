@@ -28,7 +28,9 @@ namespace RazorPress.Build
 
             foreach (FileInfo file in this.Directory.GetFiles("*.*", SearchOption.AllDirectories))
             {
-                this.Site.Pages.Add(new Page(file));
+                var page = new Page();
+                page.Content = File.ReadAllText(file.FullName);
+                this.Site.Pages.Add(page);
             }
         }
     }

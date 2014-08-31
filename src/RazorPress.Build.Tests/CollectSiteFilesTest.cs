@@ -52,40 +52,36 @@
         }
 
         [Fact]
-        public void ExecuteCreatesPageObjectsForEachFileInSiteSourceDirectory()
+        public void ExecuteCreatesPageObjectsWithContentsLoadedFromFileInDirectory()
         {
             this.directory.Create();
-            var files = new List<FileInfo>
-            {
-                new FileInfo(Path.Combine(this.directory.FullName, "about.cshtml")),
-                new FileInfo(Path.Combine(this.directory.FullName, "index.cshtml")),
-            };
-            files.ForEach(file => file.Create().Dispose());
+            var file = new FileInfo(Path.Combine(this.directory.FullName, "about.cshtml"));
+            const string fileContent = "TestContent";
+            File.WriteAllText(file.FullName, fileContent);
+
             var site = new Site();
 
             var processor = new CollectSiteFiles { Site = site, Directory = this.directory };
             processor.Execute();
 
-            Assert.Equal(files.Select(f => f.FullName), site.Pages.Select(p => p.Source.FullName));
+            Assert.Equal(fileContent, site.Pages[0].Content);
         }
 
         [Fact]
-        public void ExecuteCreatePageObjectsForFilesInSubdirectoriesOfSourceDirectory()
+        public void ExecuteCreatesPageObjectsWithContentsLoadedFromFileInSubDirectory()
         {
             this.directory.Create();
             DirectoryInfo subDirectory = this.directory.CreateSubdirectory("SubDirectory");
-            var files = new List<FileInfo>
-            {
-                new FileInfo(Path.Combine(subDirectory.FullName, "page1.cshtml")),
-                new FileInfo(Path.Combine(subDirectory.FullName, "page2.cshtml")),
-            };
-            files.ForEach(file => file.Create().Dispose());
+            var file = new FileInfo(Path.Combine(subDirectory.FullName, "about.cshtml"));
+            const string fileContent = "TestContent";
+            File.WriteAllText(file.FullName, fileContent);
+
             var site = new Site();
 
             var processor = new CollectSiteFiles { Site = site, Directory = this.directory };
             processor.Execute();
 
-            Assert.Equal(files.Select(f => f.FullName), site.Pages.Select(p => p.Source.FullName));
+            Assert.Equal(fileContent, site.Pages[0].Content);
         }
     }
 }

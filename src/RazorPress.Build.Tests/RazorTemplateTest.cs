@@ -27,7 +27,7 @@ namespace RazorPress.Build
             public void ReturnsPageFromModelToAllowUsersReferencingItDirectly()
             {
                 var site = new Site();
-                var page = new Page(new FileInfo(Path.GetRandomFileName()));
+                var page = new Page();
                 var model = new RazorTemplateModel(site, page);
                 var template = new RazorTemplate { Model = model };
                 Assert.Same(page, template.Page);
@@ -46,8 +46,7 @@ namespace RazorPress.Build
             public void ReturnsSiteFromModelToAllowUsersReferencingItDirectly()
             {
                 var site = new Site();
-                var page = new Page(new FileInfo(Path.GetRandomFileName()));
-                var model = new RazorTemplateModel(site, page);
+                var model = new RazorTemplateModel(site, new Page());
                 var template = new RazorTemplate { Model = model };
                 Assert.Same(site, template.Site);
             }

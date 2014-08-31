@@ -13,12 +13,6 @@ namespace RazorPress
             {
                 Assert.True(typeof(Page).IsPublic);
             }
-
-            [Fact]
-            public void ConstructorThrowsArgumentNullExceptionWhenSourceFileIsNullToPreventUsageErrors()
-            {
-                Assert.Throws<ArgumentNullException>(() => new Page(null));
-            }
         }
 
         public class Content : PageTest
@@ -26,7 +20,7 @@ namespace RazorPress
             [Fact]
             public void IsEmptyStringByDefaultToPreventUsageErrors()
             {
-                var page = new Page(new FileInfo(Path.GetRandomFileName()));
+                var page = new Page();
                 Assert.Equal(0, page.Content.Length);
             }
 
@@ -34,7 +28,7 @@ namespace RazorPress
             public void CanBeSetByPageProcessors()
             {
                 string content = "TestContent";
-                var page = new Page(new FileInfo(Path.GetRandomFileName()));
+                var page = new Page();
                 page.Content = content;
                 Assert.Equal(content, page.Content);
             }
@@ -42,7 +36,7 @@ namespace RazorPress
             [Fact]
             public void ThrowsArgumentNullExceptionToPreventUsageErrors()
             {
-                var page = new Page(new FileInfo(Path.GetRandomFileName()));
+                var page = new Page();
                 Assert.Throws<ArgumentNullException>(() => page.Content = null);
             }
         }
@@ -52,14 +46,14 @@ namespace RazorPress
             [Fact]
             public void IsEmptyArrayByDefaultToPreventUsageErrors()
             {
-                var page = new Page(new FileInfo(Path.GetRandomFileName()));
+                var page = new Page();
                 Assert.Equal(0, page.Tags.Length);
             }
 
             [Fact]
             public void CanBeSetByUserToSpecifyTagsForPageOrPost()
             {
-                var page = new Page(new FileInfo(Path.GetRandomFileName()));
+                var page = new Page();
                 var tags = new[] { "tag1", "tag2" };
                 page.Tags = tags;
                 Assert.Same(tags, page.Tags);
@@ -68,7 +62,7 @@ namespace RazorPress
             [Fact]
             public void ThrowsArgumentNullExceptionToPreventUsageErrors()
             {
-                var page = new Page(new FileInfo(Path.GetRandomFileName()));
+                var page = new Page();
                 Assert.Throws<ArgumentNullException>(() => page.Tags = null);
             }
         }
@@ -78,7 +72,7 @@ namespace RazorPress
             [Fact]
             public void IsEmptyStringByDefaultToPreventUsageErrors()
             {
-                var page = new Page(new FileInfo(Path.GetRandomFileName()));
+                var page = new Page();
                 Assert.Equal(0, page.Title.Length);
             }
 
@@ -86,7 +80,7 @@ namespace RazorPress
             public void CanBeSetByUserToOverrideDefaultValueBasedOnFileName()
             {
                 string title = "Hello, World";
-                var page = new Page(new FileInfo(Path.GetRandomFileName()));
+                var page = new Page();
                 page.Title = title;
                 Assert.Equal(title, page.Title);
             }
@@ -94,25 +88,8 @@ namespace RazorPress
             [Fact]
             public void ThrowsArgumentNullExceptionToPreventUsageErrors()
             {
-                var page = new Page(new FileInfo(Path.GetRandomFileName()));
+                var page = new Page();
                 Assert.Throws<ArgumentNullException>(() => page.Title = null);
-            }
-        }
-
-        public class Source : PageTest
-        {
-            [Fact]
-            public void IsInitializedByConstructor()
-            {
-                var sourceFile = new FileInfo(Path.GetRandomFileName());
-                var page = new Page(sourceFile);
-                Assert.Same(sourceFile, page.Source);
-            }
-
-            [Fact]
-            public void IsReadOnlyBecauseItCannotBeChangedByUsers()
-            {
-                Assert.Null(typeof(Page).GetProperty("Source").SetMethod);
             }
         }
     }

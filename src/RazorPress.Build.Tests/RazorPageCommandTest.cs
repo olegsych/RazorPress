@@ -37,7 +37,7 @@ namespace RazorPress.Build
         {
             var command = new TestableRazorPageCommand();
             command.Site = new Site();
-            command.Page = new Page(new FileInfo(Path.GetRandomFileName()));
+            command.Page = new Page();
 
             string output = command.Transform("@DateTime.Now.Year");
 
@@ -49,7 +49,7 @@ namespace RazorPress.Build
         {
             var command = new TestableRazorPageCommand();
             command.Site = new Site();
-            command.Page = new Page(new FileInfo(Path.GetRandomFileName()));
+            command.Page = new Page();
 
             string output = command.Transform("@this.Site.GetHashCode().ToString()");
 
@@ -61,7 +61,7 @@ namespace RazorPress.Build
         {
             var command = new TestableRazorPageCommand();
             command.Site = new Site();
-            command.Page = new Page(new FileInfo(Path.GetRandomFileName()));
+            command.Page = new Page();
 
             string output = command.Transform("@this.Page.GetHashCode().ToString()");
 

@@ -8,23 +8,9 @@ namespace RazorPress
     /// </summary>
     public class Page
     {
-        private readonly FileInfo source;
         private string content = string.Empty;
         private string[] tags = new string[0];
         private string title = string.Empty;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Page"/> class.
-        /// </summary>
-        public Page(FileInfo source)
-        {
-            if (source == null)
-            {
-                throw new ArgumentNullException("sourceFile");
-            }
-
-            this.source = source;
-        }
 
         /// <summary>
         /// Gets or sets the page content.
@@ -33,14 +19,6 @@ namespace RazorPress
         {
             get { return this.content; }
             set { SetProperty(ref this.content, value); }
-        }
-
-        /// <summary>
-        /// Gets the source file of this page.
-        /// </summary>
-        public FileInfo Source
-        {
-            get { return this.source; }
         }
 
         /// <summary>

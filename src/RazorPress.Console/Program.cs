@@ -18,8 +18,7 @@ namespace RazorPress.Console
             string inputFile, 
             string outputFile)
         {
-            var page = new Page(new FileInfo(inputFile));
-            page.Content = File.ReadAllText(inputFile);
+            var page = new Page { Content = File.ReadAllText(inputFile) };
 
             var razor = new TransformRazorPage();
             // TODO: Change Program to support site directory.
