@@ -36,7 +36,7 @@ namespace RazorPress.Build
         public void TransformReturnsTransformedTemplate()
         {
             var command = new TestableRazorPageCommand();
-            command.Site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+            command.Site = new Site();
             command.Page = new Page(new FileInfo(Path.GetRandomFileName()));
 
             string output = command.Transform("@DateTime.Now.Year");
@@ -48,7 +48,7 @@ namespace RazorPress.Build
         public void TransformPassesSiteObjectToRazorTemplate()
         {
             var command = new TestableRazorPageCommand();
-            command.Site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+            command.Site = new Site();
             command.Page = new Page(new FileInfo(Path.GetRandomFileName()));
 
             string output = command.Transform("@this.Site.GetHashCode().ToString()");
@@ -60,7 +60,7 @@ namespace RazorPress.Build
         public void TransformPassesPageObjectToRazorTemplate()
         {
             var command = new TestableRazorPageCommand();
-            command.Site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+            command.Site = new Site();
             command.Page = new Page(new FileInfo(Path.GetRandomFileName()));
 
             string output = command.Transform("@this.Page.GetHashCode().ToString()");

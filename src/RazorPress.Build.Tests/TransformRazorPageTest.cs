@@ -35,7 +35,7 @@ namespace RazorPress.Build
         public void ExecuteTransformsContentOfGivenPage()
         {
             var command = new TransformRazorPage();
-            command.Site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+            command.Site = new Site();
             command.Page = new Page(new FileInfo(Path.GetRandomFileName()))
             {
                 Title = "Hello, World",
@@ -51,7 +51,7 @@ namespace RazorPress.Build
         public void ExecuteDoesNothingWithAnEmptyContentBecauseUserMayCreateAnEmptyFile()
         {
             var command = new TransformRazorPage();
-            command.Site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+            command.Site = new Site();
             command.Page = new Page(new FileInfo(Path.GetRandomFileName()));
 
             command.Execute();

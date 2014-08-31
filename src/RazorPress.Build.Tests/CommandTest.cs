@@ -23,7 +23,7 @@ namespace RazorPress.Build
         {
             var command = new TestableCommand();
             Assert.Null(command.Site);
-            var site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+            var site = new Site();
             command.Site = site;
             Assert.Same(site, command.Site);
         }
@@ -39,7 +39,7 @@ namespace RazorPress.Build
         public void ExecuteDoesNotThrowExceptionsWhenAllInputPropertiesAreInitialized()
         {
             var command = new TestableCommand();
-            command.Site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+            command.Site = new Site();
             command.Execute(); // without exceptions
         }
 

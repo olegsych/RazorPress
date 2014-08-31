@@ -38,8 +38,17 @@
         [Fact]
         public void ExecuteInvokesBaseMethodForConsistentErrorHandling()
         {
-            var processor = new CollectSiteFiles();
-            Assert.Throws<InvalidOperationException>(() => processor.Execute());
+            var command = new CollectSiteFiles { Directory = new DirectoryInfo(Path.GetRandomFileName()) };
+            var e = Assert.Throws<InvalidOperationException>(() => command.Execute());
+            Assert.Contains("Site", e.Message);
+        }
+
+        [Fact]
+        public void ExecuteThrowsInvalidOperationExceptionWhenDirectoryIsNotInitialized()
+        {
+            var command = new CollectSiteFiles { Site = new Site() };
+            var e = Assert.Throws<InvalidOperationException>(() => command.Execute());
+            Assert.Contains("Directory", e.Message);
         }
 
         [Fact]
@@ -52,9 +61,9 @@
                 new FileInfo(Path.Combine(this.directory.FullName, "index.cshtml")),
             };
             files.ForEach(file => file.Create().Dispose());
-            var site = new Site(this.directory);
+            var site = new Site();
 
-            var processor = new CollectSiteFiles { Site = site };
+            var processor = new CollectSiteFiles { Site = site, Directory = this.directory };
             processor.Execute();
 
             Assert.Equal(files.Select(f => f.FullName), site.Pages.Select(p => p.Source.FullName));
@@ -71,9 +80,9 @@
                 new FileInfo(Path.Combine(subDirectory.FullName, "page2.cshtml")),
             };
             files.ForEach(file => file.Create().Dispose());
-            var site = new Site(this.directory);
+            var site = new Site();
 
-            var processor = new CollectSiteFiles { Site = site };
+            var processor = new CollectSiteFiles { Site = site, Directory = this.directory };
             processor.Execute();
 
             Assert.Equal(files.Select(f => f.FullName), site.Pages.Select(p => p.Source.FullName));

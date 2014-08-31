@@ -52,7 +52,7 @@ namespace RazorPress.Build
         public void ExecuteThrowsInvalidOperationExceptionWhenPageIsNullToPreventUsageErrors()
         {
             var command = new TestablePageCommand();
-            command.Site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+            command.Site = new Site();
             var e = Assert.Throws<InvalidOperationException>(() => command.Execute());
             Assert.Contains("Page", e.Message);
         }
@@ -61,7 +61,7 @@ namespace RazorPress.Build
         public void ExecuteDoesNotThrowExceptionsWhenAllInputPropertiesAreInitialized()
         {
             var command = new TestablePageCommand();
-            command.Site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+            command.Site = new Site();
             command.Page = new Page(new FileInfo(Path.GetRandomFileName()));
             command.Execute(); // without exceptions
         }

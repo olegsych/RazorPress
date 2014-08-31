@@ -23,7 +23,7 @@ namespace RazorPress.Console
 
             var razor = new TransformRazorPage();
             // TODO: Change Program to support site directory.
-            razor.Site = new Site(new DirectoryInfo(Path.GetRandomFileName())); 
+            razor.Site = new Site(); 
             razor.Page = page;
             razor.Execute();
 

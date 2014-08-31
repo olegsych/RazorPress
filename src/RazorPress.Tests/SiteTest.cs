@@ -14,12 +14,6 @@ namespace RazorPress
             {
                 Assert.True(typeof(Site).IsPublic);
             }
-
-            [Fact]
-            public void ThrowsArgumentExceptionToPreventUsageErrors()
-            {
-                Assert.Throws<ArgumentNullException>(() => new Site(null));
-            }
         }
 
         public class Pages : SiteTest
@@ -27,7 +21,7 @@ namespace RazorPress
             [Fact]
             public void PagesIsNotNullByDefaultToPreventUsageErrors()
             {
-                var site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+                var site = new Site();
                 IList<Page> pages = site.Pages;
                 Assert.NotNull(pages);
             }
@@ -39,29 +33,12 @@ namespace RazorPress
             }
         }
 
-        public class Source : SiteTest
-        {
-            [Fact]
-            public void IsInitializedByConstructor()
-            {
-                var source = new DirectoryInfo(Path.GetRandomFileName());
-                var site = new Site(source);
-                Assert.Same(source, site.Source);
-            }
-
-            [Fact]
-            public void IsReadOnlyAndShouldNotBeChanged()
-            {
-                Assert.Null(typeof(Site).GetProperty("Source").SetMethod);
-            }
-        }
-
         public class Tags : SiteTest
         {
             [Fact]
             public void TagsIsNotNullByDefaultToPreventUsageErrors()
             {
-                var site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+                var site = new Site();
                 IList<Tag> tags = site.Tags;
                 Assert.NotNull(tags);
             }

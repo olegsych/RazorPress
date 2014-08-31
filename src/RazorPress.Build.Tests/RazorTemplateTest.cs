@@ -26,7 +26,7 @@ namespace RazorPress.Build
             [Fact]
             public void ReturnsPageFromModelToAllowUsersReferencingItDirectly()
             {
-                var site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+                var site = new Site();
                 var page = new Page(new FileInfo(Path.GetRandomFileName()));
                 var model = new RazorTemplateModel(site, page);
                 var template = new RazorTemplate { Model = model };
@@ -45,7 +45,7 @@ namespace RazorPress.Build
             [Fact]
             public void ReturnsSiteFromModelToAllowUsersReferencingItDirectly()
             {
-                var site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+                var site = new Site();
                 var page = new Page(new FileInfo(Path.GetRandomFileName()));
                 var model = new RazorTemplateModel(site, page);
                 var template = new RazorTemplate { Model = model };

@@ -23,7 +23,7 @@ namespace RazorPress.Build
         public void ExecuteCreatesSingleTagObjectWhenSiteHasPageWithSingleTagName()
         {
             var page = new Page(new FileInfo(Path.GetRandomFileName())) { Tags = new[] { "TagName" } };
-            var site = new Site(new DirectoryInfo(Path.GetRandomFileName())) { Pages = { page } };
+            var site = new Site() { Pages = { page } };
             var command = new GenerateSiteTags { Site = site };
 
             command.Execute();
@@ -38,7 +38,7 @@ namespace RazorPress.Build
         {
             string[] tagNames = { "tag1", "tag2" };
             var page = new Page(new FileInfo(Path.GetRandomFileName())) { Tags = tagNames };
-            var site = new Site(new DirectoryInfo(Path.GetRandomFileName())) { Pages = { page } };
+            var site = new Site() { Pages = { page } };
             var command = new GenerateSiteTags { Site = site };
 
             command.Execute();
@@ -52,7 +52,7 @@ namespace RazorPress.Build
         {
             var tag = new Tag("TagName");
             var page = new Page(new FileInfo(Path.GetRandomFileName())) { Tags = new[] { tag.Name } };
-            var site = new Site(new DirectoryInfo(Path.GetRandomFileName())) { Pages = { page }, Tags = { tag } };
+            var site = new Site() { Pages = { page }, Tags = { tag } };
             var command = new GenerateSiteTags { Site = site };
 
             command.Execute();
@@ -66,7 +66,7 @@ namespace RazorPress.Build
         {
             var tag = new Tag("TAGNAME");
             var page = new Page(new FileInfo(Path.GetRandomFileName())) { Tags = new[] { "tagname" } };
-            var site = new Site(new DirectoryInfo(Path.GetRandomFileName())) { Pages = { page }, Tags = { tag } };
+            var site = new Site() { Pages = { page }, Tags = { tag } };
             var command = new GenerateSiteTags { Site = site };
 
             command.Execute();

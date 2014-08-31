@@ -10,12 +10,23 @@ namespace RazorPress.Build
     public class CollectSiteFiles : Command
     {
         /// <summary>
+        /// Gets or sets the directory with web site source files.
+        /// </summary>
+        public DirectoryInfo Directory { get; set; }
+
+        /// <summary>
         /// Populates the <see cref="Site"/> with <see cref="Page"/> objects representing files in the source directory of a web site.
         /// </summary>
         public override void Execute()
         {
             base.Execute();
-            foreach (FileInfo file in this.Site.Source.GetFiles("*.*", SearchOption.AllDirectories))
+
+            if (this.Directory == null)
+            {
+                throw new InvalidOperationException("Directory must be initialized.");
+            }
+
+            foreach (FileInfo file in this.Directory.GetFiles("*.*", SearchOption.AllDirectories))
             {
                 this.Site.Pages.Add(new Page(file));
             }

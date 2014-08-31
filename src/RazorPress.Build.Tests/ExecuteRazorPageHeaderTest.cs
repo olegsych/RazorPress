@@ -22,7 +22,7 @@ namespace RazorPress.Build
         public void ExecuteRendersHeaderSectionOfRazorTemplateToInitializePageProperties()
         {
             var command = new ExecuteRazorPageHeader();
-            command.Site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+            command.Site = new Site();
             command.Page = new Page(new FileInfo(Path.GetRandomFileName()))
             {
                 Content = @"

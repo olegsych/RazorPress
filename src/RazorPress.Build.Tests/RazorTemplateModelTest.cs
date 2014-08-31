@@ -14,7 +14,7 @@ namespace RazorPress.Build
         [Fact]
         public void ConstructorInitializesPropertyValues()
         {
-            var site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+            var site = new Site();
             var page = new Page(new FileInfo(Path.GetRandomFileName()));
             var model = new RazorTemplateModel(site, page);
             Assert.Same(site, model.Site);

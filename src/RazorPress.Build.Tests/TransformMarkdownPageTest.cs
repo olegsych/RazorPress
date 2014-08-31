@@ -25,7 +25,7 @@ namespace RazorPress.Build
             page.Content = "# Header";
 
             var processor = new TransformMarkdownPage();
-            processor.Site = new Site(new DirectoryInfo(Path.GetRandomFileName()));
+            processor.Site = new Site();
             processor.Page = page;
             processor.Execute();
 
