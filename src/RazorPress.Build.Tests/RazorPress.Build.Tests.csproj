@@ -30,6 +30,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenerateSiteTagsTest.cs" />
     <Compile Include="RazorPageCommandTest.cs" />
     <Compile Include="ReadRazorPageHeaderTest.cs" />
     <Compile Include="TransformMarkdownPageTest.cs" />
