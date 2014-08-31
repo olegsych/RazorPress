@@ -11,6 +11,15 @@ namespace RazorPress
         private string content = string.Empty;
         private string[] tags = new string[0];
         private string title = string.Empty;
+        private Uri url;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Page"/> class with the given <see cref="Url"/>.
+        /// </summary>
+        public Page(string url)
+        {
+            this.Url = url;
+        }
 
         /// <summary>
         /// Gets or sets the page content.
@@ -40,6 +49,27 @@ namespace RazorPress
         {
             get { return this.title; }
             set { SetProperty(ref this.title, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the relative URL of the page.
+        /// </summary>
+        public string Url
+        {
+            get 
+            { 
+                return this.url.ToString(); 
+            }
+
+            set 
+            { 
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Relative url value is expected.");
+                }
+
+                this.url = new Uri(value, UriKind.Relative); 
+            }
         }
 
         private static void SetProperty<T>(ref T field, T value) where T : class

@@ -29,7 +29,7 @@ namespace RazorPress.Build
         {
             var command = new TestablePageCommand();
             Assert.Null(command.Page);
-            var page = new Page();
+            var page = new Page("index.html");
             command.Page = page;
             Assert.Same(page, command.Page);
         }
@@ -62,7 +62,7 @@ namespace RazorPress.Build
         {
             var command = new TestablePageCommand();
             command.Site = new Site();
-            command.Page = new Page();
+            command.Page = new Page("index.html");
             command.Execute(); // without exceptions
         }
 

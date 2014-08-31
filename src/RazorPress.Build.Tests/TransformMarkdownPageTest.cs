@@ -21,7 +21,7 @@ namespace RazorPress.Build
         [Fact]
         public void ExecuteConvertsPageContentFromMarkdownToHtml()
         {
-            var page = new Page();
+            var page = new Page("index.html");
             page.Content = "# Header";
 
             var processor = new TransformMarkdownPage();

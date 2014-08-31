@@ -36,7 +36,7 @@ namespace RazorPress.Build
         {
             var command = new TransformRazorPage();
             command.Site = new Site();
-            command.Page = new Page()
+            command.Page = new Page("index.html")
             {
                 Title = "Hello, World",
                 Content = "@Model.Page.Title",
@@ -52,7 +52,7 @@ namespace RazorPress.Build
         {
             var command = new TransformRazorPage();
             command.Site = new Site();
-            command.Page = new Page();
+            command.Page = new Page("index.html");
 
             command.Execute();
 

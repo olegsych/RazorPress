@@ -22,7 +22,7 @@ namespace RazorPress.Build
         [Fact]
         public void ExecuteCreatesSingleTagObjectWhenSiteHasPageWithSingleTagName()
         {
-            var page = new Page() { Tags = new[] { "TagName" } };
+            var page = new Page("index.html") { Tags = new[] { "TagName" } };
             var site = new Site() { Pages = { page } };
             var command = new GenerateSiteTags { Site = site };
 
@@ -37,7 +37,7 @@ namespace RazorPress.Build
         public void ExecuteCreatesMultipleTagObjectsWhenSiteHasPageWithMultipleTagNames()
         {
             string[] tagNames = { "tag1", "tag2" };
-            var page = new Page() { Tags = tagNames };
+            var page = new Page("index.html") { Tags = tagNames };
             var site = new Site() { Pages = { page } };
             var command = new GenerateSiteTags { Site = site };
 
@@ -51,7 +51,7 @@ namespace RazorPress.Build
         public void ExecuteAddsPageToExistingTagWithMatchingName()
         {
             var tag = new Tag("TagName");
-            var page = new Page() { Tags = new[] { tag.Name } };
+            var page = new Page("index.html") { Tags = new[] { tag.Name } };
             var site = new Site() { Pages = { page }, Tags = { tag } };
             var command = new GenerateSiteTags { Site = site };
 
@@ -65,7 +65,7 @@ namespace RazorPress.Build
         public void ExecuteIgnoresCaseWhenComparingTagNames()
         {
             var tag = new Tag("TAGNAME");
-            var page = new Page() { Tags = new[] { "tagname" } };
+            var page = new Page("index.html") { Tags = new[] { "tagname" } };
             var site = new Site() { Pages = { page }, Tags = { tag } };
             var command = new GenerateSiteTags { Site = site };
 
