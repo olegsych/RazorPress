@@ -26,9 +26,12 @@ namespace RazorPress.Build
                 throw new InvalidOperationException("Directory must be initialized.");
             }
 
+            var directoryUri = new Uri(this.Directory.FullName + Path.DirectorySeparatorChar);
             foreach (FileInfo file in this.Directory.GetFiles("*.*", SearchOption.AllDirectories))
             {
-                var page = new Page("index.html");
+                var fileUri = new Uri(file.FullName);
+                Uri pageUri = directoryUri.MakeRelativeUri(fileUri);
+                var page = new Page('/' + pageUri.ToString());
                 page.Content = File.ReadAllText(file.FullName);
                 this.Site.Pages.Add(page);
             }
