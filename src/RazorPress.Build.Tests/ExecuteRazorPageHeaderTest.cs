@@ -23,7 +23,7 @@ namespace RazorPress.Build
         {
             var command = new ExecuteRazorPageHeader();
             command.Site = new Site();
-            command.Page = new Page("index.html")
+            command.Page = new Page("/index.html")
             {
                 Content = @"
                 @{

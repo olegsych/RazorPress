@@ -27,7 +27,7 @@ namespace RazorPress.Build
             public void ReturnsPageFromModelToAllowUsersReferencingItDirectly()
             {
                 var site = new Site();
-                var page = new Page("index.html");
+                var page = new Page("/index.html");
                 var model = new RazorTemplateModel(site, page);
                 var template = new RazorTemplate { Model = model };
                 Assert.Same(page, template.Page);
@@ -46,7 +46,7 @@ namespace RazorPress.Build
             public void ReturnsSiteFromModelToAllowUsersReferencingItDirectly()
             {
                 var site = new Site();
-                var model = new RazorTemplateModel(site, new Page("index.html"));
+                var model = new RazorTemplateModel(site, new Page("/index.html"));
                 var template = new RazorTemplate { Model = model };
                 Assert.Same(site, template.Site);
             }

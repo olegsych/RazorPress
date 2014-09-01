@@ -15,7 +15,7 @@ namespace RazorPress.Build
         public void ConstructorInitializesPropertyValues()
         {
             var site = new Site();
-            var page = new Page("index.html");
+            var page = new Page("/index.html");
             var model = new RazorTemplateModel(site, page);
             Assert.Same(site, model.Site);
             Assert.Same(page, model.Page);

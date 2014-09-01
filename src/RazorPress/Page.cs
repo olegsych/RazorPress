@@ -52,7 +52,7 @@ namespace RazorPress
         }
 
         /// <summary>
-        /// Gets or sets the relative URL of the page.
+        /// Gets or sets the relative URL of the page without the domain.
         /// </summary>
         public string Url
         {
@@ -68,7 +68,12 @@ namespace RazorPress
                     throw new ArgumentException("Relative url value is expected.");
                 }
 
-                this.url = new Uri(value, UriKind.Relative); 
+                if (!value.StartsWith("/"))
+                {
+                    throw new UriFormatException("Url must start with a slash (/).");
+                }
+
+                this.url = new Uri(value, UriKind.Relative);
             }
         }
 
