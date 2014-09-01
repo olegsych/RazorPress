@@ -1,9 +1,13 @@
 ﻿namespace RazorPress.Build
 {
     /// <summary>
-    /// Defines discover stage of the RazorPress build process.
+    /// Defines the discovery stage of the RazorPress build process.
     /// </summary>
-    [Command(DependsOn = new[] { typeof(CollectSiteFiles), typeof(ExecuteRazorPageHeaders) })]
+    [Command(
+        DependsOn = new[] { 
+            typeof(CollectSiteFiles), 
+        }
+    )]
     public class Discover : Command
     {
     }

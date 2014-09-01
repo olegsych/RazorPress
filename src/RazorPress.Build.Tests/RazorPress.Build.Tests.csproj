@@ -35,6 +35,7 @@
     <Compile Include="DiscoverTest.cs" />
     <Compile Include="FileSystemTest.cs" />
     <Compile Include="GenerateSiteTagsTest.cs" />
+    <Compile Include="PrepareTest.cs" />
     <Compile Include="RazorPageCommandTest.cs" />
     <Compile Include="ExecuteRazorPageHeadersTest.cs" />
     <Compile Include="SavePagesToDirectoryTest.cs" />

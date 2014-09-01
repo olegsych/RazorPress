@@ -24,7 +24,7 @@ namespace RazorPress.Build
         public void ClassDefinesListOfCommandsItDependsOnThroughMefMetadata()
         {
            ICommandMetadata metadata = typeof(Discover).GetCustomAttributes(false).OfType<CommandAttribute>().Single();
-           Assert.Equal(new[] { typeof(CollectSiteFiles), typeof(ExecuteRazorPageHeaders) }, metadata.DependsOn);
+           Assert.Equal(new[] { typeof(CollectSiteFiles) }, metadata.DependsOn);
         }
     }
 }
