@@ -20,10 +20,9 @@ namespace RazorPress.Console
         {
             var page = new Page('/' + Path.GetFileName(inputFile)) { Content = File.ReadAllText(inputFile) };
 
-            var razor = new TransformRazorPage();
+            var razor = new TransformRazorPages();
             // TODO: Change Program to support site directory.
-            razor.Site = new Site(); 
-            razor.Page = page;
+            razor.Site = new Site { Pages = { page } };
             razor.Execute();
 
             File.WriteAllText(outputFile, page.Content);

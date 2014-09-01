@@ -35,11 +35,11 @@ namespace RazorPress.Build
         [Fact]
         public void TransformReturnsTransformedTemplate()
         {
+            var page = new Page("/index.html");
             var command = new TestableRazorPageCommand();
-            command.Site = new Site();
-            command.Page = new Page("/index.html");
+            command.Site = new Site { Pages = { page } };
 
-            string output = command.Transform("@DateTime.Now.Year");
+            string output = command.Transform(page, "@DateTime.Now.Year");
 
             Assert.Equal(DateTime.Now.Year.ToString(), output);
         }
@@ -47,11 +47,10 @@ namespace RazorPress.Build
         [Fact]
         public void TransformPassesSiteObjectToRazorTemplate()
         {
-            var command = new TestableRazorPageCommand();
-            command.Site = new Site();
-            command.Page = new Page("/index.html");
+            var command = new TestableRazorPageCommand { Site = new Site() };
+            var page = new Page("/index.html");
 
-            string output = command.Transform("@this.Site.GetHashCode().ToString()");
+            string output = command.Transform(page, "@this.Site.GetHashCode().ToString()");
 
             Assert.Equal(command.Site.GetHashCode().ToString(), output);
         }
@@ -59,20 +58,23 @@ namespace RazorPress.Build
         [Fact]
         public void TransformPassesPageObjectToRazorTemplate()
         {
-            var command = new TestableRazorPageCommand();
-            command.Site = new Site();
-            command.Page = new Page("/index.html");
+            var command = new TestableRazorPageCommand { Site = new Site() };
+            var page = new Page("/index.html");
 
-            string output = command.Transform("@this.Page.GetHashCode().ToString()");
+            string output = command.Transform(page, "@this.Page.GetHashCode().ToString()");
 
-            Assert.Equal(command.Page.GetHashCode().ToString(), output);
+            Assert.Equal(page.GetHashCode().ToString(), output);
         }
 
         private class TestableRazorPageCommand : RazorPageCommand
         {
-            public new string Transform(string template)
+            public new string Transform(Page page, string template)
             {
-                return base.Transform(template);
+                return base.Transform(page, template);
+            }
+
+            protected override void Execute(Page page)
+            {
             }
         }
     }

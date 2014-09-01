@@ -25,16 +25,6 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void PagePropertyIsNullByDefaultAndHasToBeInitializedByCodeExecutingTheCommand()
-        {
-            var command = new TestablePageCommand();
-            Assert.Null(command.Page);
-            var page = new Page("/index.html");
-            command.Page = page;
-            Assert.Same(page, command.Page);
-        }
-
-        [Fact]
         public void ExecuteOverridesMethodInheritedFromBaseClass()
         {
             Assert.Equal(typeof(Command).GetMethod("Execute"), typeof(PageCommand).GetMethod("Execute").GetBaseDefinition());
@@ -49,25 +39,27 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void ExecuteThrowsInvalidOperationExceptionWhenPageIsNullToPreventUsageErrors()
+        public void ExecuteInvokesProtectedExecuteMethodForEveryPageOfSite()
         {
+            var testPage = new Page("/index.html");
+            Page executedPage = null;
             var command = new TestablePageCommand();
-            command.Site = new Site();
-            var e = Assert.Throws<InvalidOperationException>(() => command.Execute());
-            Assert.Contains("Page", e.Message);
-        }
+            command.OnExecute = page => executedPage = page;
+            command.Site = new Site { Pages = { testPage } };
 
-        [Fact]
-        public void ExecuteDoesNotThrowExceptionsWhenAllInputPropertiesAreInitialized()
-        {
-            var command = new TestablePageCommand();
-            command.Site = new Site();
-            command.Page = new Page("/index.html");
-            command.Execute(); // without exceptions
+            command.Execute();
+
+            Assert.Same(testPage, executedPage);
         }
 
         private class TestablePageCommand : PageCommand
         {
+            public Action<Page> OnExecute = page => { };
+
+            protected override void Execute(Page page)
+            {
+                this.OnExecute(page);
+            }
         }
     }
 }

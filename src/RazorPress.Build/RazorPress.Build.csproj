@@ -25,12 +25,12 @@
     <Compile Include="Command.cs" />
     <Compile Include="GenerateSiteTags.cs" />
     <Compile Include="RazorPageCommand.cs" />
-    <Compile Include="ExecuteRazorPageHeader.cs" />
-    <Compile Include="TransformMarkdownPage.cs" />
+    <Compile Include="ExecuteRazorPageHeaders.cs" />
+    <Compile Include="TransformMarkdownPages.cs" />
     <Compile Include="PageCommand.cs" />
     <Compile Include="RazorTemplateModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TransformRazorPage.cs" />
+    <Compile Include="TransformRazorPages.cs" />
     <Compile Include="RazorTemplate.cs" />
     <Compile Include="CollectSiteFiles.cs" />
   </ItemGroup>

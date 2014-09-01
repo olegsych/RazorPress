@@ -23,9 +23,9 @@ namespace RazorPress.Build
         /// <summary>
         /// Returns output of the specified <paramref name="template"/> transformed by the Razor engine.
         /// </summary>
-        protected string Transform(string template)
+        protected string Transform(Page page, string template)
         {
-            var model = new RazorTemplateModel(this.Site, this.Page);
+            var model = new RazorTemplateModel(this.Site, page);
             return this.templateService.Parse(template, model, null, null);
         }
     }

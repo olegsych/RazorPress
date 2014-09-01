@@ -5,18 +5,16 @@ namespace RazorPress.Build
     /// <summary>
     /// Transforms markdown to HTML.
     /// </summary>
-    public class TransformMarkdownPage : PageCommand
+    public class TransformMarkdownPages : PageCommand
     {
         private readonly Markdown markdown = new Markdown();
 
         /// <summary>
         /// Transforms <see cref="Page.Content"/> from markdown to HTML format.
         /// </summary>
-        public override void Execute()
+        protected override void Execute(Page page)
         {
-            base.Execute();
-
-            this.Page.Content = this.markdown.Transform(this.Page.Content);
+            page.Content = this.markdown.Transform(page.Content);
         }
     }
 }

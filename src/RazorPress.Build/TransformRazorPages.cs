@@ -7,19 +7,17 @@ namespace RazorPress.Build
     /// <summary>
     /// Transforms Razor template.
     /// </summary>
-    public class TransformRazorPage : RazorPageCommand
+    public class TransformRazorPages : RazorPageCommand
     {
         /// <summary>
         /// Transforms <see cref="Page.Content"/> using Razor templating engine.
         /// </summary>
-        public override void Execute()
+        protected override void Execute(Page page)
         {
-            base.Execute();
-
-            string template = this.Page.Content;
+            string template = page.Content;
             if (!string.IsNullOrEmpty(template))
             {
-                this.Page.Content = this.Transform(template);
+                page.Content = this.Transform(page, template);
             }
         }
     }

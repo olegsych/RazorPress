@@ -8,11 +8,6 @@ namespace RazorPress.Build
     public abstract class PageCommand : Command
     {
         /// <summary>
-        /// Gets or sets the <see cref="Page"/> this command will process.
-        /// </summary>
-        public Page Page { get; set; }
-
-        /// <summary>
         /// Executes the page command.
         /// </summary>
         /// <exception cref="InvalidOperationException">
@@ -26,10 +21,15 @@ namespace RazorPress.Build
         {
             base.Execute();
 
-            if (this.Page == null)
+            foreach (Page page in this.Site.Pages)
             {
-                throw new InvalidOperationException("Page property must be initialized.");
+                this.Execute(page);
             }
         }
+
+        /// <summary>
+        /// Overriden in derived classes to perform command logic for every <see cref="Page"/> of the <see cref="Site"/>.
+        /// </summary>
+        protected abstract void Execute(Page page);
     }
 }

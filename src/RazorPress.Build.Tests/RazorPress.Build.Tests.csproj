@@ -32,11 +32,11 @@
   <ItemGroup>
     <Compile Include="GenerateSiteTagsTest.cs" />
     <Compile Include="RazorPageCommandTest.cs" />
-    <Compile Include="ExecuteRazorPageHeaderTest.cs" />
-    <Compile Include="TransformMarkdownPageTest.cs" />
+    <Compile Include="ExecuteRazorPageHeadersTest.cs" />
+    <Compile Include="TransformMarkdownPagesTest.cs" />
     <Compile Include="PageCommandTest.cs" />
     <Compile Include="RazorTemplateModelTest.cs" />
-    <Compile Include="TransformRazorPageTest.cs" />
+    <Compile Include="TransformRazorPagesTest.cs" />
     <Compile Include="RazorTemplateTest.cs" />
     <Compile Include="CollectSiteFilesTest.cs" />
     <Compile Include="CommandTest.cs" />
