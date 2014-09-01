@@ -23,19 +23,8 @@ namespace RazorPress.Build
         [Fact]
         public void ClassDefinesListOfCommandsItDependsOnThroughMefMetadata()
         {
-           ICommandMetadata metadata = GetCommandMetadata<Discover>();
+           ICommandMetadata metadata = typeof(Discover).GetCustomAttributes(false).OfType<CommandAttribute>().Single();
            Assert.Equal(new[] { typeof(CollectSiteFiles), typeof(ExecuteRazorPageHeaders) }, metadata.DependsOn);
-        }
-
-        private static ICommandMetadata GetCommandMetadata<T>() where T : Command
-        {
-            using (var catalog = new AssemblyCatalog(typeof(T).Assembly))
-            using (var container = new CompositionContainer(catalog))
-            {
-                IEnumerable<Lazy<Command, ICommandMetadata>> exports = container.GetExports<Command, ICommandMetadata>(string.Empty);
-                Lazy<Command, ICommandMetadata> export = exports.Single(e => e.Value is T);
-                return export.Metadata;
-            }
         }
     }
 }
