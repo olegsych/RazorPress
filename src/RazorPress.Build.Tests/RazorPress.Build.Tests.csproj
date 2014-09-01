@@ -32,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandAttributeTest.cs" />
+    <Compile Include="DiscoverTest.cs" />
     <Compile Include="FileSystemTest.cs" />
     <Compile Include="GenerateSiteTagsTest.cs" />
     <Compile Include="RazorPageCommandTest.cs" />
