@@ -30,9 +30,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileSystemTest.cs" />
     <Compile Include="GenerateSiteTagsTest.cs" />
     <Compile Include="RazorPageCommandTest.cs" />
     <Compile Include="ExecuteRazorPageHeadersTest.cs" />
+    <Compile Include="SavePagesToDirectoryTest.cs" />
     <Compile Include="TransformMarkdownPagesTest.cs" />
     <Compile Include="PageCommandTest.cs" />
     <Compile Include="RazorTemplateModelTest.cs" />

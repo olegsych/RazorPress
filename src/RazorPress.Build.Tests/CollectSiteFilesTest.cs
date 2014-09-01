@@ -6,23 +6,8 @@
     using System.Linq;
     using Xunit;
 
-    public class CollectSiteFilesTest : IDisposable
+    public class CollectSiteFilesTest : FileSystemTest
     {
-        private DirectoryInfo directory;
-
-        public CollectSiteFilesTest()
-        {
-            this.directory = new DirectoryInfo(Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()));
-        }
-
-        public void Dispose()
-        {
-            if (this.directory.Exists)
-            {
-                this.directory.Delete(true);
-            }
-        }
-
         [Fact]
         public void ClassIsPublicForDocumentationAndExtensibility()
         {
