@@ -32,6 +32,7 @@
     <Compile Include="RazorPageCommand.cs" />
     <Compile Include="ExecuteRazorPageHeaders.cs" />
     <Compile Include="SavePagesToDirectory.cs" />
+    <Compile Include="Transform.cs" />
     <Compile Include="TransformMarkdownPages.cs" />
     <Compile Include="PageCommand.cs" />
     <Compile Include="RazorTemplateModel.cs" />

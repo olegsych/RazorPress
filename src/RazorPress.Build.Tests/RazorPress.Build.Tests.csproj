@@ -46,6 +46,7 @@
     <Compile Include="RazorTemplateTest.cs" />
     <Compile Include="CollectSiteFilesTest.cs" />
     <Compile Include="CommandTest.cs" />
+    <Compile Include="TransformTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
