@@ -23,6 +23,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Build.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandAttribute.cs" />
     <Compile Include="Discover.cs" />
