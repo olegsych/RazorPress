@@ -1,13 +1,17 @@
-﻿namespace RazorPress.Build
+﻿using System.ComponentModel.Composition;
+
+namespace RazorPress.Build
 {
     /// <summary>
     /// Defines deployment stage of the RazorPress build process.
     /// </summary>
+    [Export]
     public class Deploy : CompositeCommand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Deploy"/> command.
         /// </summary>
+        [ImportingConstructor]
         public Deploy(SavePagesToDirectory savePagesToDirectory)
             : base(new[] { savePagesToDirectory })
         {

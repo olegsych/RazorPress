@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using RazorEngine.Configuration;
 using RazorEngine.Templating;
 
@@ -7,6 +8,7 @@ namespace RazorPress.Build
     /// <summary>
     /// Updates <see cref="Page"/> properties from its header section.
     /// </summary>
+    [Export]
     public class ExecuteRazorPageHeaders : RazorPageCommand
     {
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using System.IO;
 
 namespace RazorPress.Build
@@ -7,6 +8,7 @@ namespace RazorPress.Build
     /// Responsible for discovering source files in a directory and populating the <see cref="Site"/> model
     /// with <see cref="Page"/> objects.
     /// </summary>
+    [Export]
     public class CollectSiteFiles : Command
     {
         /// <summary>

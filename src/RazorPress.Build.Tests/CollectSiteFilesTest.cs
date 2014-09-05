@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.Composition.Hosting;
     using System.IO;
     using System.Linq;
     using Xunit;
@@ -18,6 +19,15 @@
         public void ClassInheritsFromCommandForCompatibilityWithOtherSiteProcessors()
         {
             Assert.True(typeof(Command).IsAssignableFrom(typeof(CollectSiteFiles)));
+        }
+
+        [Fact]
+        public void ClassIsDiscoverableDuringComposition()
+        {
+            var catalog = new AssemblyCatalog(typeof(Command).Assembly);
+            var container = new CompositionContainer(catalog);
+            var command = container.GetExportedValue<CollectSiteFiles>();
+            Assert.NotNull(command);
         }
 
         [Fact]

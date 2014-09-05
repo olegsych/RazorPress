@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.ComponentModel.Composition.Hosting;
+using System.Linq;
 using Xunit;
 
 namespace RazorPress.Build
@@ -26,6 +27,15 @@ namespace RazorPress.Build
             var prepare = new Prepare(executeRazorPageHeaders, generateSiteTags);
 
             Assert.Equal(new Command[] { executeRazorPageHeaders, generateSiteTags}, prepare.DependsOn);
+        }
+
+        [Fact]
+        public void ConstructorIsAutomaticallyInvokedDuringComposition()
+        {
+            var catalog = new AssemblyCatalog(typeof(Command).Assembly);
+            var container = new CompositionContainer(catalog);
+            var command = container.GetExportedValue<Prepare>();
+            Assert.NotEmpty(command.DependsOn);
         }
     }
 }

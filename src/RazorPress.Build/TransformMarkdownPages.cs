@@ -1,10 +1,12 @@
-﻿using MarkdownDeep;
+﻿using System.ComponentModel.Composition;
+using MarkdownDeep;
 
 namespace RazorPress.Build
 {
     /// <summary>
     /// Transforms markdown to HTML.
     /// </summary>
+    [Export]
     public class TransformMarkdownPages : PageCommand
     {
         private readonly Markdown markdown = new Markdown();

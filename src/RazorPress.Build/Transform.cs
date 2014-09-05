@@ -1,13 +1,17 @@
-﻿namespace RazorPress.Build
+﻿using System.ComponentModel.Composition;
+
+namespace RazorPress.Build
 {
     /// <summary>
     /// Defines transformation stage of the RazorPress build process.
     /// </summary>
+    [Export]
     public class Transform : CompositeCommand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Transform"/> command.
         /// </summary>
+        [ImportingConstructor]
         public Transform(TransformMarkdownPages transformMarkdownPages, TransformRazorPages transformRazorPages)
             : base(new Command[] { transformMarkdownPages, transformRazorPages })
         {

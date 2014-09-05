@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using Xunit;
 
@@ -16,6 +17,15 @@ namespace RazorPress.Build
         public void ClassInheritsFromPageCommandForCodeReuseAndPolymorphism()
         {
             Assert.True(typeof(PageCommand).IsAssignableFrom(typeof(TransformMarkdownPages)));
+        }
+
+        [Fact]
+        public void ClassIsDiscoverableDuringComposition()
+        {
+            var catalog = new AssemblyCatalog(typeof(Command).Assembly);
+            var container = new CompositionContainer(catalog);
+            var command = container.GetExportedValue<TransformMarkdownPages>();
+            Assert.NotNull(command);
         }
 
         [Fact]

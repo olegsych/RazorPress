@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.ComponentModel.Composition.Hosting;
+using System.Linq;
 using Xunit;
 
 namespace RazorPress.Build
@@ -23,6 +24,15 @@ namespace RazorPress.Build
             var savePagesToDirectory = new SavePagesToDirectory();
             var deploy = new Deploy(savePagesToDirectory);
             Assert.Equal(new[] { savePagesToDirectory }, deploy.DependsOn);
+        }
+
+        [Fact]
+        public void ConstructorIsAutomaticallyInvokedDuringComposition()
+        {
+            var catalog = new AssemblyCatalog(typeof(Command).Assembly);
+            var container = new CompositionContainer(catalog);
+            var command = container.GetExportedValue<Deploy>();
+            Assert.NotEmpty(command.DependsOn);
         }
     }
 }

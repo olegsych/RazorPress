@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using System.IO;
 
 namespace RazorPress.Build
@@ -6,6 +7,7 @@ namespace RazorPress.Build
     /// <summary>
     /// Saves <see cref="Site.Pages"/> to the specified <see cref="Directory"/>.
     /// </summary>
+    [Export]
     public class SavePagesToDirectory : PageCommand
     {
         /// <summary>

@@ -27,5 +27,14 @@ namespace RazorPress.Build
             var discover = new Discover(collectSiteFiles);
             Assert.Equal(new[] { collectSiteFiles }, discover.DependsOn);
         }
+
+        [Fact]
+        public void ConstructorIsAutomaticallyInvokedDuringComposition()
+        {
+            var catalog = new AssemblyCatalog(typeof(Command).Assembly);
+            var container = new CompositionContainer(catalog);
+            var command = container.GetExportedValue<Discover>();
+            Assert.NotEmpty(command.DependsOn);
+        }
     }
 }

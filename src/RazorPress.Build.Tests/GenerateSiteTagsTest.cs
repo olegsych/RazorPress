@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
 using Xunit;
@@ -17,6 +18,15 @@ namespace RazorPress.Build
         public void ClassInheritsFromCommandAndAppliesToEntireSite()
         {
             Assert.True(typeof(Command).IsAssignableFrom(typeof(GenerateSiteTags)));
+        }
+
+        [Fact]
+        public void ClassIsDiscoverableDuringComposition()
+        {
+            var catalog = new AssemblyCatalog(typeof(Command).Assembly);
+            var container = new CompositionContainer(catalog);
+            var command = container.GetExportedValue<GenerateSiteTags>();
+            Assert.NotNull(command);
         }
 
         [Fact]
