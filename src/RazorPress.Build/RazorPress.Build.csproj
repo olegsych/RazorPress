@@ -25,11 +25,9 @@
   <ItemGroup>
     <Compile Include="Build.cs" />
     <Compile Include="Command.cs" />
-    <Compile Include="CommandAttribute.cs" />
     <Compile Include="CompositeCommand.cs" />
     <Compile Include="Discover.cs" />
     <Compile Include="GenerateSiteTags.cs" />
-    <Compile Include="ICommandMetadata.cs" />
     <Compile Include="Prepare.cs" />
     <Compile Include="RazorPageCommand.cs" />
     <Compile Include="ExecuteRazorPageHeaders.cs" />
