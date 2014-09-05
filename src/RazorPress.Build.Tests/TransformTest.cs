@@ -12,16 +12,20 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void ClassInheritsFromCommandForPolymorphism()
+        public void ClassInheritsFromCompositeCommandToReuseCommandExecutionLogic()
         {
-            Assert.True(typeof(Command).IsAssignableFrom(typeof(Transform)));
+            Assert.True(typeof(CompositeCommand).IsAssignableFrom(typeof(Transform)));
         }
 
         [Fact]
-        public void ClassDefinesCommandsItDependsOnThroughMefMetadata()
+        public void ConstructorInitializesCompositeCommandWithCommandsTransformDependsOn()
         {
-            ICommandMetadata metadata = typeof(Transform).GetCustomAttributes(false).OfType<CommandAttribute>().Single();
-            Assert.Equal(new[] { typeof(TransformMarkdownPages), typeof(TransformRazorPages) }, metadata.DependsOn);
+            var transformMarkdownPages = new TransformMarkdownPages();
+            var transformRazorPages = new TransformRazorPages();
+
+            var transform = new Transform(transformMarkdownPages, transformRazorPages);
+
+            Assert.Equal(new Command[] { transformMarkdownPages, transformRazorPages }, transform.DependsOn);
         }
     }
 }

@@ -11,6 +11,9 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1408.0717\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="RazorEngine">
       <HintPath>..\packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
     </Reference>
@@ -33,6 +36,7 @@
   <ItemGroup>
     <Compile Include="BuildTest.cs" />
     <Compile Include="CommandAttributeTest.cs" />
+    <Compile Include="CompositeCommandTest.cs" />
     <Compile Include="DiscoverTest.cs" />
     <Compile Include="FileSystemTest.cs" />
     <Compile Include="GenerateSiteTagsTest.cs" />

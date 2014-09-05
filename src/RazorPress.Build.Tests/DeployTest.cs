@@ -12,16 +12,17 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void ClassInheritsFromCommandBecauseItIsACommand()
+        public void ClassInheritsFromCompositeCommandToReuseCommandExecutionLogic()
         {
-            Assert.True(typeof(Command).IsAssignableFrom(typeof(Deploy)));
+            Assert.True(typeof(CompositeCommand).IsAssignableFrom(typeof(Deploy)));
         }
 
         [Fact]
-        public void ClassDefinesCommandsItDependsOnUsingMefMetadata()
+        public void ConstructorInitializesCompositeCommandCommandsDeployDependsOn()
         {
-            ICommandMetadata metadata = typeof(Deploy).GetCustomAttributes(false).OfType<CommandAttribute>().Single();
-            Assert.Equal(new[] { typeof(SavePagesToDirectory) }, metadata.DependsOn);
+            var savePagesToDirectory = new SavePagesToDirectory();
+            var deploy = new Deploy(savePagesToDirectory);
+            Assert.Equal(new[] { savePagesToDirectory }, deploy.DependsOn);
         }
     }
 }

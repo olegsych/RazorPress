@@ -15,16 +15,17 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void ClassInheritsFromCommandForCodeReuseAndPolymorphism()
+        public void ClassInheritsFromCompositeCommandToReuseCommandExecutionLogic()
         {
-            Assert.True(typeof(Command).IsAssignableFrom(typeof(Discover)));
+            Assert.True(typeof(CompositeCommand).IsAssignableFrom(typeof(Discover)));
         }
 
         [Fact]
-        public void ClassDefinesListOfCommandsItDependsOnThroughMefMetadata()
+        public void ConstructorInitializesCompositeCommandWithCommandsDiscoverDependsOn()
         {
-           ICommandMetadata metadata = typeof(Discover).GetCustomAttributes(false).OfType<CommandAttribute>().Single();
-           Assert.Equal(new[] { typeof(CollectSiteFiles) }, metadata.DependsOn);
+            var collectSiteFiles = new CollectSiteFiles();
+            var discover = new Discover(collectSiteFiles);
+            Assert.Equal(new[] { collectSiteFiles }, discover.DependsOn);
         }
     }
 }

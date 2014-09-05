@@ -12,16 +12,20 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void ClassInheritsFromCommandForCodeReuseAndPolymorphism()
+        public void ClassInheritsFromCompositeCommandToReuseCommonExecutionLogic()
         {
-            Assert.True(typeof(Command).IsAssignableFrom(typeof(Prepare)));
+            Assert.True(typeof(CompositeCommand).IsAssignableFrom(typeof(Prepare)));
         }
 
         [Fact]
-        public void ClassDefinesListOfCommandsItDependsOnThroughMefMetadata()
+        public void ConstructorInitializesCompositeCommandWithCommandsPrepareDependsOn()
         {
-            ICommandMetadata metadata = typeof(Prepare).GetCustomAttributes(false).OfType<CommandAttribute>().Single();
-            Assert.Equal(new[] { typeof(ExecuteRazorPageHeaders), typeof(GenerateSiteTags) }, metadata.DependsOn);
+            var executeRazorPageHeaders = new ExecuteRazorPageHeaders();
+            var generateSiteTags = new GenerateSiteTags();
+
+            var prepare = new Prepare(executeRazorPageHeaders, generateSiteTags);
+
+            Assert.Equal(new Command[] { executeRazorPageHeaders, generateSiteTags}, prepare.DependsOn);
         }
     }
 }
