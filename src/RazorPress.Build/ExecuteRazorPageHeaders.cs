@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using RazorEngine.Configuration;
-using RazorEngine.Templating;
+﻿using System.Composition;
 
 namespace RazorPress.Build
 {

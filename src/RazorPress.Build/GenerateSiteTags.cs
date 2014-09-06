@@ -1,5 +1,5 @@
 ﻿using System;
-using System.ComponentModel.Composition;
+using System.Composition;
 using System.Linq;
 
 namespace RazorPress.Build
@@ -8,7 +8,7 @@ namespace RazorPress.Build
     /// Creates <see cref="Site.Tags"/> for all tagged <see cref="Site.Pages"/>.
     /// </summary>
     [Export]
-    public class GenerateSiteTags : Command
+    public class GenerateSiteTags : SiteCommand
     {
         /// <summary>
         /// Adds each <see cref="Page"/> to a new or existing <see cref="Tag"/> of the web <see cref="Site"/>.

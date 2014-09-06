@@ -1,6 +1,6 @@
 ﻿using System;
-using System.ComponentModel.Composition.Hosting;
-using System.IO;
+using System.Composition.Hosting;
+using MefBuild;
 using Xunit;
 
 namespace RazorPress.Build
@@ -22,9 +22,9 @@ namespace RazorPress.Build
         [Fact]
         public void ClassIsDiscoverableDuringComposition()
         {
-            var catalog = new AssemblyCatalog(typeof(Command).Assembly);
-            var container = new CompositionContainer(catalog);
-            var command = container.GetExportedValue<ExecuteRazorPageHeaders>();
+            var configuration = new ContainerConfiguration().WithAssembly(typeof(SiteCommand).Assembly);
+            CompositionHost container = configuration.CreateContainer();
+            var command = container.GetExport<ExecuteRazorPageHeaders>();
             Assert.NotNull(command);
         }
 

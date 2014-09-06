@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.Composition;
+﻿using System.Composition;
 
 namespace RazorPress.Build
 {
@@ -6,7 +6,7 @@ namespace RazorPress.Build
     /// Defines the discovery stage of the RazorPress build process.
     /// </summary>
     [Export]
-    public class Discover : CompositeCommand
+    public class Discover : SiteCommand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Discover"/> command.

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.IO;
+using MefBuild;
 using Xunit;
 
 namespace RazorPress.Build
@@ -13,9 +13,9 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void ClassInheritsFromCommandForCodeReuseAndPolymorphism()
+        public void ClassInheritsFromSiteCommandForCodeReuseAndPolymorphism()
         {
-            Assert.True(typeof(Command).IsAssignableFrom(typeof(PageCommand)));
+            Assert.True(typeof(SiteCommand).IsAssignableFrom(typeof(PageCommand)));
         }
 
         [Fact]

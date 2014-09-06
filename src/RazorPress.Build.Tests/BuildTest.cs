@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.Composition.Hosting;
-using System.Linq;
+﻿using System.Composition.Hosting;
+using MefBuild;
 using Moq;
 using Xunit;
 
@@ -14,9 +14,9 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void ClassInheritsFromCompositeCommandToReuseCommandExecutionLogic()
+        public void ClassInheritsFromSiteCommandToReuseCommandExecutionLogic()
         {
-            Assert.True(typeof(CompositeCommand).IsAssignableFrom(typeof(Build)));
+            Assert.True(typeof(SiteCommand).IsAssignableFrom(typeof(Build)));
         }
 
         [Fact]
@@ -29,15 +29,15 @@ namespace RazorPress.Build
 
             var command = new Build(discover, prepare, transform, deploy);
 
-            Assert.Equal(new Command[] { discover, prepare, transform, deploy }, command.DependsOn);
+            Assert.Equal(new ICommand[] { discover, prepare, transform, deploy }, command.DependsOn);
         }
 
         [Fact]
         public void ConstructorIsAutomaticallyInvokedDuringComposition()
         {
-            var catalog = new AssemblyCatalog(typeof(Command).Assembly);
-            var container = new CompositionContainer(catalog);
-            var command = container.GetExportedValue<Build>();
+            var configuration = new ContainerConfiguration().WithAssembly(typeof(SiteCommand).Assembly);
+            CompositionHost container = configuration.CreateContainer();
+            var command = container.GetExport<Build>();
             Assert.NotEmpty(command.DependsOn);
         }
     }

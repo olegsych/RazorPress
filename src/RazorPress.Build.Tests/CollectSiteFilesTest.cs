@@ -1,10 +1,8 @@
 ﻿namespace RazorPress.Build
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition.Hosting;
+    using System.Composition.Hosting;
     using System.IO;
-    using System.Linq;
     using Xunit;
 
     public class CollectSiteFilesTest : FileSystemTest
@@ -16,17 +14,17 @@
         }
 
         [Fact]
-        public void ClassInheritsFromCommandForCompatibilityWithOtherSiteProcessors()
+        public void ClassInheritsFromSiteCommandForCompatibilityWithOtherSiteProcessors()
         {
-            Assert.True(typeof(Command).IsAssignableFrom(typeof(CollectSiteFiles)));
+            Assert.True(typeof(SiteCommand).IsAssignableFrom(typeof(CollectSiteFiles)));
         }
 
         [Fact]
         public void ClassIsDiscoverableDuringComposition()
         {
-            var catalog = new AssemblyCatalog(typeof(Command).Assembly);
-            var container = new CompositionContainer(catalog);
-            var command = container.GetExportedValue<CollectSiteFiles>();
+            var configuration = new ContainerConfiguration().WithAssembly(typeof(SiteCommand).Assembly);
+            CompositionHost container = configuration.CreateContainer();
+            var command = container.GetExport<CollectSiteFiles>();
             Assert.NotNull(command);
         }
 

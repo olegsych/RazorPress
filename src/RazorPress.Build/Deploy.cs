@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.Composition;
+﻿using System.Composition;
 
 namespace RazorPress.Build
 {
@@ -6,7 +6,7 @@ namespace RazorPress.Build
     /// Defines deployment stage of the RazorPress build process.
     /// </summary>
     [Export]
-    public class Deploy : CompositeCommand
+    public class Deploy : SiteCommand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Deploy"/> command.

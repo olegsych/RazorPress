@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.Composition.Hosting;
-using System.Linq;
+﻿using System.Composition.Hosting;
+using MefBuild;
 using Xunit;
 
 namespace RazorPress.Build
@@ -13,9 +13,9 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void ClassInheritsFromCompositeCommandToReuseCommandExecutionLogic()
+        public void ClassInheritsFromSiteCommandToReuseCommandExecutionLogic()
         {
-            Assert.True(typeof(CompositeCommand).IsAssignableFrom(typeof(Transform)));
+            Assert.True(typeof(SiteCommand).IsAssignableFrom(typeof(Transform)));
         }
 
         [Fact]
@@ -26,15 +26,15 @@ namespace RazorPress.Build
 
             var transform = new Transform(transformMarkdownPages, transformRazorPages);
 
-            Assert.Equal(new Command[] { transformMarkdownPages, transformRazorPages }, transform.DependsOn);
+            Assert.Equal(new ICommand[] { transformMarkdownPages, transformRazorPages }, transform.DependsOn);
         }
 
         [Fact]
         public void ConstructorIsAutomaticallyInvokedDuringComposition()
         {
-            var catalog = new AssemblyCatalog(typeof(Command).Assembly);
-            var container = new CompositionContainer(catalog);
-            var command = container.GetExportedValue<Transform>();
+            var configuration = new ContainerConfiguration().WithAssembly(typeof(SiteCommand).Assembly);
+            CompositionHost container = configuration.CreateContainer();
+            var command = container.GetExport<Transform>();
             Assert.NotEmpty(command.DependsOn);
         }
     }

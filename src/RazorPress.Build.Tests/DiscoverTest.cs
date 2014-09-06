@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition.Hosting;
-using System.Linq;
+﻿using System.Composition.Hosting;
 using Xunit;
 
 namespace RazorPress.Build
@@ -15,9 +12,9 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void ClassInheritsFromCompositeCommandToReuseCommandExecutionLogic()
+        public void ClassInheritsFromSiteCommandToReuseCommandExecutionLogic()
         {
-            Assert.True(typeof(CompositeCommand).IsAssignableFrom(typeof(Discover)));
+            Assert.True(typeof(SiteCommand).IsAssignableFrom(typeof(Discover)));
         }
 
         [Fact]
@@ -31,9 +28,9 @@ namespace RazorPress.Build
         [Fact]
         public void ConstructorIsAutomaticallyInvokedDuringComposition()
         {
-            var catalog = new AssemblyCatalog(typeof(Command).Assembly);
-            var container = new CompositionContainer(catalog);
-            var command = container.GetExportedValue<Discover>();
+            var configuration = new ContainerConfiguration().WithAssembly(typeof(SiteCommand).Assembly);
+            CompositionHost container = configuration.CreateContainer();
+            var command = container.GetExport<Discover>();
             Assert.NotEmpty(command.DependsOn);
         }
     }

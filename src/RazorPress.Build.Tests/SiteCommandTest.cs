@@ -1,21 +1,27 @@
 ﻿using System;
-using System.IO;
+using MefBuild;
 using Xunit;
 
 namespace RazorPress.Build
 {
-    public class CommandTest
+    public class SiteCommandTest
     {
         [Fact]
         public void ClassIsPublicSoThatUsersCanSomedayBuildExtensions()
         {
-            Assert.True(typeof(Command).IsPublic);
+            Assert.True(typeof(SiteCommand).IsPublic);
         }
 
         [Fact]
         public void ClassIsAbstractToOnlyServeAsBaseClass()
         {
-            Assert.True(typeof(Command).IsAbstract);
+            Assert.True(typeof(SiteCommand).IsAbstract);
+        }
+
+        [Fact]
+        public void ClassInheritsFromCommandToReuseCompositionAndExecutionLogic()
+        {
+            Assert.True(typeof(Command).IsAssignableFrom(typeof(SiteCommand)));
         }
 
         [Fact]
@@ -44,12 +50,18 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void ExecuteMethodIsVirtualForDerivedClassesToImplementActualLogic()
+        public void ExecuteOverridesInheritedMethodForPolymorphicExecution()
         {
-            Assert.True(typeof(Command).GetMethod("Execute").IsVirtual);
+            Assert.Equal(typeof(Command).GetMethod("Execute"), typeof(SiteCommand).GetMethod("Execute").GetBaseDefinition());
         }
 
-        private class TestableCommand : Command
+        [Fact]
+        public void ExecuteMethodIsVirtualForDerivedClassesToImplementActualLogic()
+        {
+            Assert.True(typeof(SiteCommand).GetMethod("Execute").IsVirtual);
+        }
+
+        private class TestableCommand : SiteCommand
         {
         }
     }

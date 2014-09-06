@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System.Composition;
+using MefBuild;
 
 namespace RazorPress.Build
 {
@@ -6,14 +7,14 @@ namespace RazorPress.Build
     /// Defines transformation stage of the RazorPress build process.
     /// </summary>
     [Export]
-    public class Transform : CompositeCommand
+    public class Transform : SiteCommand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Transform"/> command.
         /// </summary>
         [ImportingConstructor]
         public Transform(TransformMarkdownPages transformMarkdownPages, TransformRazorPages transformRazorPages)
-            : base(new Command[] { transformMarkdownPages, transformRazorPages })
+            : base(new ICommand[] { transformMarkdownPages, transformRazorPages })
         {
         }
 

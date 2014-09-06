@@ -1,5 +1,5 @@
 ﻿using System;
-using System.ComponentModel.Composition;
+using System.Composition;
 using System.IO;
 
 namespace RazorPress.Build
@@ -9,7 +9,7 @@ namespace RazorPress.Build
     /// with <see cref="Page"/> objects.
     /// </summary>
     [Export]
-    public class CollectSiteFiles : Command
+    public class CollectSiteFiles : SiteCommand
     {
         /// <summary>
         /// Gets or sets the directory with web site source files.

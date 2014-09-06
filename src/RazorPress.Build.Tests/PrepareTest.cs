@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.Composition.Hosting;
-using System.Linq;
+﻿using System.Composition.Hosting;
+using MefBuild;
 using Xunit;
 
 namespace RazorPress.Build
@@ -13,28 +13,28 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void ClassInheritsFromCompositeCommandToReuseCommonExecutionLogic()
+        public void ClassInheritsFromSiteCommandToReuseCommonExecutionLogic()
         {
-            Assert.True(typeof(CompositeCommand).IsAssignableFrom(typeof(Prepare)));
+            Assert.True(typeof(SiteCommand).IsAssignableFrom(typeof(Prepare)));
         }
 
         [Fact]
-        public void ConstructorInitializesCompositeCommandWithCommandsPrepareDependsOn()
+        public void ConstructorInitializesCommandWithCommandsPrepareDependsOn()
         {
             var executeRazorPageHeaders = new ExecuteRazorPageHeaders();
             var generateSiteTags = new GenerateSiteTags();
 
             var prepare = new Prepare(executeRazorPageHeaders, generateSiteTags);
 
-            Assert.Equal(new Command[] { executeRazorPageHeaders, generateSiteTags}, prepare.DependsOn);
+            Assert.Equal(new ICommand[] { executeRazorPageHeaders, generateSiteTags}, prepare.DependsOn);
         }
 
         [Fact]
         public void ConstructorIsAutomaticallyInvokedDuringComposition()
         {
-            var catalog = new AssemblyCatalog(typeof(Command).Assembly);
-            var container = new CompositionContainer(catalog);
-            var command = container.GetExportedValue<Prepare>();
+            var configuration = new ContainerConfiguration().WithAssembly(typeof(SiteCommand).Assembly);
+            CompositionHost container = configuration.CreateContainer();
+            var command = container.GetExport<Prepare>();
             Assert.NotEmpty(command.DependsOn);
         }
     }
