@@ -26,7 +26,7 @@ namespace RazorPress.Build
 
             var transform = new Transform(transformMarkdownPages, transformRazorPages);
 
-            Assert.Equal(new ICommand[] { transformMarkdownPages, transformRazorPages }, transform.DependsOn);
+            Assert.Equal(new Command[] { transformMarkdownPages, transformRazorPages }, transform.DependsOn);
         }
 
         [Fact]

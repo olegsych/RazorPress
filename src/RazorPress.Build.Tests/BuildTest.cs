@@ -29,7 +29,7 @@ namespace RazorPress.Build
 
             var command = new Build(discover, prepare, transform, deploy);
 
-            Assert.Equal(new ICommand[] { discover, prepare, transform, deploy }, command.DependsOn);
+            Assert.Equal(new Command[] { discover, prepare, transform, deploy }, command.DependsOn);
         }
 
         [Fact]

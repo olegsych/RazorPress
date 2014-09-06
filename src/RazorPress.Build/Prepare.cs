@@ -14,7 +14,7 @@ namespace RazorPress.Build
         /// </summary>
         [ImportingConstructor]
         public Prepare(ExecuteRazorPageHeaders executeRazorPageHeaders, GenerateSiteTags generateSiteTags)
-            : base(new ICommand[] { executeRazorPageHeaders, generateSiteTags })
+            : base(new Command[] { executeRazorPageHeaders, generateSiteTags })
         {
         }
 

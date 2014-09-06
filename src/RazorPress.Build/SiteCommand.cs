@@ -18,7 +18,7 @@ namespace RazorPress.Build
         /// <summary>
         /// Initializes a new instance of the <see cref="SiteCommand"/> with the specified commands it depends on.
         /// </summary>
-        protected SiteCommand(params ICommand[] dependsOn) : base(dependsOn)
+        protected SiteCommand(params Command[] dependsOn) : base(dependsOn)
         {
         }
 

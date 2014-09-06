@@ -26,7 +26,7 @@ namespace RazorPress.Build
 
             var prepare = new Prepare(executeRazorPageHeaders, generateSiteTags);
 
-            Assert.Equal(new ICommand[] { executeRazorPageHeaders, generateSiteTags}, prepare.DependsOn);
+            Assert.Equal(new Command[] { executeRazorPageHeaders, generateSiteTags}, prepare.DependsOn);
         }
 
         [Fact]

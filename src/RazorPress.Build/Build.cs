@@ -14,7 +14,7 @@ namespace RazorPress.Build
         /// </summary>
         [ImportingConstructor]
         public Build(Discover discover, Prepare prepare, Transform transform, Deploy deploy)
-            : base(new ICommand[] { discover, prepare, transform, deploy })
+            : base(new Command[] { discover, prepare, transform, deploy })
         {
         }
     }

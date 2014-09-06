@@ -14,7 +14,7 @@ namespace RazorPress.Build
         /// </summary>
         [ImportingConstructor]
         public Transform(TransformMarkdownPages transformMarkdownPages, TransformRazorPages transformRazorPages)
-            : base(new ICommand[] { transformMarkdownPages, transformRazorPages })
+            : base(new Command[] { transformMarkdownPages, transformRazorPages })
         {
         }
 
