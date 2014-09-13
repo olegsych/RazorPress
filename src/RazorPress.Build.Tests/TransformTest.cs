@@ -1,4 +1,4 @@
-﻿using System.Composition.Hosting;
+﻿using System.Linq;
 using MefBuild;
 using Xunit;
 
@@ -19,23 +19,10 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void ConstructorInitializesCompositeCommandWithCommandsTransformDependsOn()
+        public void ClassSpecifiesCommandsItDependsOnViaMefBuildAttributes()
         {
-            var transformMarkdownPages = new TransformMarkdownPages();
-            var transformRazorPages = new TransformRazorPages();
-
-            var transform = new Transform(transformMarkdownPages, transformRazorPages);
-
-            Assert.Equal(new Command[] { transformMarkdownPages, transformRazorPages }, transform.DependsOn);
-        }
-
-        [Fact]
-        public void ConstructorIsAutomaticallyInvokedDuringComposition()
-        {
-            var configuration = new ContainerConfiguration().WithAssembly(typeof(SiteCommand).Assembly);
-            CompositionHost container = configuration.CreateContainer();
-            var command = container.GetExport<Transform>();
-            Assert.NotEmpty(command.DependsOn);
+            var attribute = typeof(Transform).GetCustomAttributes(false).OfType<DependsOnAttribute>().Single();
+            Assert.Equal(new[] { typeof(TransformMarkdownPages), typeof(TransformRazorPages) }, attribute.DependencyCommandTypes);
         }
     }
 }

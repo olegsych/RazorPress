@@ -9,20 +9,6 @@ namespace RazorPress.Build
     public abstract class SiteCommand : Command
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SiteCommand"/> class without dependencies.
-        /// </summary>
-        protected SiteCommand() : base()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SiteCommand"/> with the specified commands it depends on.
-        /// </summary>
-        protected SiteCommand(params Command[] dependsOn) : base(dependsOn)
-        {
-        }
-
-        /// <summary>
         /// Gets or sets a <see cref="Site"/> object that represents the web site being generated.
         /// </summary>
         public Site Site { get; set; }

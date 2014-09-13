@@ -1,4 +1,5 @@
-﻿using System.Composition.Hosting;
+﻿using System.Linq;
+using MefBuild;
 using Xunit;
 
 namespace RazorPress.Build
@@ -18,20 +19,10 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void ConstructorInitializesCompositeCommandWithCommandsDiscoverDependsOn()
+        public void ClassSpecifiesCommandsItDependsOnViaMefBuildAttributes()
         {
-            var collectSiteFiles = new CollectSiteFiles();
-            var discover = new Discover(collectSiteFiles);
-            Assert.Equal(new[] { collectSiteFiles }, discover.DependsOn);
-        }
-
-        [Fact]
-        public void ConstructorIsAutomaticallyInvokedDuringComposition()
-        {
-            var configuration = new ContainerConfiguration().WithAssembly(typeof(SiteCommand).Assembly);
-            CompositionHost container = configuration.CreateContainer();
-            var command = container.GetExport<Discover>();
-            Assert.NotEmpty(command.DependsOn);
+            var attribute = typeof(Discover).GetCustomAttributes(false).OfType<DependsOnAttribute>().Single();
+            Assert.Equal(new[] { typeof(CollectSiteFiles) }, attribute.DependencyCommandTypes);
         }
     }
 }

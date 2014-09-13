@@ -1,4 +1,4 @@
-﻿using System.Composition.Hosting;
+﻿using System.Linq;
 using MefBuild;
 using Xunit;
 
@@ -19,23 +19,10 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void ConstructorInitializesCommandWithCommandsPrepareDependsOn()
+        public void ClassSpecifiesCommandsItDependsOnViaMefBuildAttributes()
         {
-            var executeRazorPageHeaders = new ExecuteRazorPageHeaders();
-            var generateSiteTags = new GenerateSiteTags();
-
-            var prepare = new Prepare(executeRazorPageHeaders, generateSiteTags);
-
-            Assert.Equal(new Command[] { executeRazorPageHeaders, generateSiteTags}, prepare.DependsOn);
-        }
-
-        [Fact]
-        public void ConstructorIsAutomaticallyInvokedDuringComposition()
-        {
-            var configuration = new ContainerConfiguration().WithAssembly(typeof(SiteCommand).Assembly);
-            CompositionHost container = configuration.CreateContainer();
-            var command = container.GetExport<Prepare>();
-            Assert.NotEmpty(command.DependsOn);
+            var attribute = typeof(Prepare).GetCustomAttributes(false).OfType<DependsOnAttribute>().Single();
+            Assert.Equal(new[] { typeof(ExecuteRazorPageHeaders), typeof(GenerateSiteTags) }, attribute.DependencyCommandTypes);
         }
     }
 }

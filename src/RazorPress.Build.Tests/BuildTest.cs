@@ -1,6 +1,5 @@
-﻿using System.Composition.Hosting;
+﻿using System.Linq;
 using MefBuild;
-using Moq;
 using Xunit;
 
 namespace RazorPress.Build
@@ -20,25 +19,10 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void ConstructorInitializesCompositeCommandWithCommandsBuildDependsOn()
+        public void ClassSpecifiesCommandsItDependsOnViaMefBuildAttributes()
         {
-            var discover = new Mock<Discover>().Object;
-            var prepare = new Mock<Prepare>().Object;
-            var transform = new Mock<Transform>().Object;
-            var deploy = new Mock<Deploy>().Object;
-
-            var command = new Build(discover, prepare, transform, deploy);
-
-            Assert.Equal(new Command[] { discover, prepare, transform, deploy }, command.DependsOn);
-        }
-
-        [Fact]
-        public void ConstructorIsAutomaticallyInvokedDuringComposition()
-        {
-            var configuration = new ContainerConfiguration().WithAssembly(typeof(SiteCommand).Assembly);
-            CompositionHost container = configuration.CreateContainer();
-            var command = container.GetExport<Build>();
-            Assert.NotEmpty(command.DependsOn);
+            var attribute = typeof(Build).GetCustomAttributes(false).OfType<DependsOnAttribute>().Single();
+            Assert.Equal(new[] { typeof(Discover), typeof(Prepare), typeof(Transform), typeof(Deploy) }, attribute.DependencyCommandTypes);
         }
     }
 }
