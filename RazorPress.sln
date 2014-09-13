@@ -3,22 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress", "RazorPress\RazorPress.csproj", "{D7217AF4-DA86-43C2-BECD-1EB2928840A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress", "src\RazorPress\RazorPress.csproj", "{D7217AF4-DA86-43C2-BECD-1EB2928840A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Tests", "RazorPress.Tests\RazorPress.Tests.csproj", "{CBB99CD0-D69A-4159-88CA-3989CB506141}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Tests", "src\RazorPress.Tests\RazorPress.Tests.csproj", "{CBB99CD0-D69A-4159-88CA-3989CB506141}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0B511591-38B2-475E-9085-D7FC04F2EE82}"
 	ProjectSection(SolutionItems) = preProject
-		Common.props = Common.props
+		src\Common.props = src\Common.props
+		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Console", "RazorPress.Console\RazorPress.Console.csproj", "{F57FEC59-93E5-44C5-958D-7EB95D339B34}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Console", "src\RazorPress.Console\RazorPress.Console.csproj", "{F57FEC59-93E5-44C5-958D-7EB95D339B34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Console.Tests", "RazorPress.Console.Tests\RazorPress.Console.Tests.csproj", "{4B4B3C86-C4FC-4D31-B79D-A229769ADABA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Console.Tests", "src\RazorPress.Console.Tests\RazorPress.Console.Tests.csproj", "{4B4B3C86-C4FC-4D31-B79D-A229769ADABA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Build", "RazorPress.Build\RazorPress.Build.csproj", "{1960F7D8-82B3-45F3-9A61-96DF62639A47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Build", "src\RazorPress.Build\RazorPress.Build.csproj", "{1960F7D8-82B3-45F3-9A61-96DF62639A47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Build.Tests", "RazorPress.Build.Tests\RazorPress.Build.Tests.csproj", "{853C5BC3-BC62-4CEC-8A34-3C9B7332F9F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Build.Tests", "src\RazorPress.Build.Tests\RazorPress.Build.Tests.csproj", "{853C5BC3-BC62-4CEC-8A34-3C9B7332F9F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
