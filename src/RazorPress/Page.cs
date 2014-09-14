@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace RazorPress
@@ -16,6 +17,7 @@ namespace RazorPress
         /// <summary>
         /// Initializes a new instance of the <see cref="Page"/> class with the given <see cref="Url"/>.
         /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "0#", Justification = "Temporary")]
         public Page(string url)
         {
             this.Url = url;
@@ -33,6 +35,7 @@ namespace RazorPress
         /// <summary>
         /// Gets or sets the tags of this page.
         /// </summary>
+        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "Array allows compact initialization of this property in template code.")]
         public string[] Tags
         {
             get { return this.tags; }
@@ -54,6 +57,7 @@ namespace RazorPress
         /// <summary>
         /// Gets or sets the relative URL of the page without the domain.
         /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings", Justification = "String allows compact initialization of this property in template code.")]
         public string Url
         {
             get 
@@ -68,7 +72,7 @@ namespace RazorPress
                     throw new ArgumentException("Relative url value is expected.");
                 }
 
-                if (!value.StartsWith("/"))
+                if (!value.StartsWith("/", StringComparison.Ordinal))
                 {
                     throw new UriFormatException("Url must start with a slash (/).");
                 }

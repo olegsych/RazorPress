@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		src\Common.props = src\Common.props
 		README.md = README.md
+		src\Settings.StyleCop = src\Settings.StyleCop
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPress.Console", "src\RazorPress.Console\RazorPress.Console.csproj", "{F57FEC59-93E5-44C5-958D-7EB95D339B34}"

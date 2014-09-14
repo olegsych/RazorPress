@@ -16,9 +16,9 @@ namespace RazorPress
             [Fact]
             public void InitializesUrlProperty()
             {
-                const string url ="/about.cshtml";
-                var page = new Page(url);
-                Assert.Equal(url, page.Url);
+                const string Url = "/about.cshtml";
+                var page = new Page(Url);
+                Assert.Equal(Url, page.Url);
             }
 
             [Fact]

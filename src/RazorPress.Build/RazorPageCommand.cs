@@ -1,4 +1,5 @@
-﻿using RazorEngine.Configuration;
+﻿using System;
+using RazorEngine.Configuration;
 using RazorEngine.Templating;
 
 namespace RazorPress.Build
@@ -6,7 +7,7 @@ namespace RazorPress.Build
     /// <summary>
     /// Serves as a base class for page commands that require Razor template services.
     /// </summary>
-    public abstract class RazorPageCommand : PageCommand
+    public abstract class RazorPageCommand : PageCommand, IDisposable
     {
         private readonly TemplateService templateService;
 
@@ -18,6 +19,26 @@ namespace RazorPress.Build
             var configuration = new TemplateServiceConfiguration();
             configuration.BaseTemplateType = typeof(RazorTemplate);
             this.templateService = new TemplateService(configuration);
+        }
+
+        /// <summary>
+        /// Disposes <see cref="TemplateService"/> created by this object.
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Disposes resources owned by this instance.
+        /// </summary>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.templateService.Dispose();
+            }
         }
 
         /// <summary>

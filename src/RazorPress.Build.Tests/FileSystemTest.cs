@@ -5,18 +5,32 @@ namespace RazorPress.Build
 {
     public class FileSystemTest : IDisposable
     {
-        protected readonly DirectoryInfo directory;
+        private readonly DirectoryInfo directory;
 
         public FileSystemTest()
         {
             this.directory = new DirectoryInfo(Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()));
         }
 
+        protected DirectoryInfo Directory
+        {
+            get { return this.directory; }
+        }
+
         public void Dispose()
         {
-            if (this.directory.Exists)
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                this.directory.Delete(true);
+                if (this.directory.Exists)
+                {
+                    this.directory.Delete(true);
+                }
             }
         }
     }

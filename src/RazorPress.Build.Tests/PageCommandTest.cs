@@ -54,7 +54,12 @@ namespace RazorPress.Build
 
         private class TestablePageCommand : PageCommand
         {
-            public Action<Page> OnExecute = page => { };
+            public TestablePageCommand()
+            {
+                this.OnExecute = page => { };
+            }
+
+            public Action<Page> OnExecute { get; set; }
 
             protected override void Execute(Page page)
             {

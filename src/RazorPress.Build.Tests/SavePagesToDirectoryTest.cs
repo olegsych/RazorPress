@@ -52,15 +52,15 @@ namespace RazorPress.Build
         [Fact]
         public void ExecuteCreatesFileInTargetDirectory()
         {
-            this.directory.Create();
+            this.Directory.Create();
 
             var page = new Page("/index.html");
             var site = new Site { Pages = { page } };
-            var command = new SavePagesToDirectory { Directory = this.directory, Site = site };
+            var command = new SavePagesToDirectory { Directory = this.Directory, Site = site };
 
             command.Execute();
 
-            string filePath = Path.Combine(this.directory.FullName, "index.html");
+            string filePath = Path.Combine(this.Directory.FullName, "index.html");
             Assert.True(File.Exists(filePath));
         }
 
@@ -69,11 +69,11 @@ namespace RazorPress.Build
         {
             var page = new Page("/index.html");
             var site = new Site { Pages = { page } };
-            var command = new SavePagesToDirectory { Directory = this.directory, Site = site };
+            var command = new SavePagesToDirectory { Directory = this.Directory, Site = site };
 
             command.Execute();
 
-            string filePath = Path.Combine(this.directory.FullName, "index.html");
+            string filePath = Path.Combine(this.Directory.FullName, "index.html");
             Assert.True(File.Exists(filePath));
         }
 
@@ -82,11 +82,11 @@ namespace RazorPress.Build
         {
             var page = new Page("/index.html") { Content = "TestValue" };
             var site = new Site { Pages = { page } };
-            var command = new SavePagesToDirectory { Directory = this.directory, Site = site };
+            var command = new SavePagesToDirectory { Directory = this.Directory, Site = site };
 
             command.Execute();
 
-            string filePath = Path.Combine(this.directory.FullName, "index.html");
+            string filePath = Path.Combine(this.Directory.FullName, "index.html");
             Assert.Equal(page.Content, File.ReadAllText(filePath));
         }
 
@@ -95,11 +95,11 @@ namespace RazorPress.Build
         {
             var page = new Page("/subdirectory/index.html") { Content = "TestValue" };
             var site = new Site { Pages = { page } };
-            var command = new SavePagesToDirectory { Directory = this.directory, Site = site };
+            var command = new SavePagesToDirectory { Directory = this.Directory, Site = site };
 
             command.Execute();
 
-            string filePath = Path.Combine(this.directory.FullName, "subdirectory\\index.html");
+            string filePath = Path.Combine(this.Directory.FullName, "subdirectory\\index.html");
             Assert.Equal(page.Content, File.ReadAllText(filePath));
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace RazorPress.Build
@@ -31,6 +32,7 @@ namespace RazorPress.Build
         /// <summary>
         /// Saves the given <see cref="Page"/> to the output <see cref="Directory"/>.
         /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "This method is called only by the base class.")]
         protected override void Execute(Page page)
         {
             string relativeFilePath = page.Url.TrimStart('/').Replace('/', '\\');

@@ -6,28 +6,16 @@ namespace RazorPress.Console
 {
     public sealed class ProgramTest : IDisposable
     {
-        private string WorkingDirectory = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+        private string workingDirectory = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
 
         public ProgramTest()
         {
-            Directory.CreateDirectory(WorkingDirectory);
+            Directory.CreateDirectory(this.workingDirectory);
         }
 
         public void Dispose()
         {
-            Directory.Delete(WorkingDirectory, true);
-        }
-
-        private string CreateTestFile(string extension)
-        {
-            string fileName = Path.GetRandomFileName();
-            fileName = Path.ChangeExtension(fileName, extension);
-            fileName = Path.Combine(WorkingDirectory, fileName);
-            using (File.CreateText(fileName))
-            {
-            }
-
-            return fileName;
+            Directory.Delete(this.workingDirectory, true);
         }
 
         [Fact]
@@ -70,6 +58,18 @@ namespace RazorPress.Console
         {
             string[] args = new[] { "render", "/inputFile=nonexistent.cshtml", "/outputFile=output.html" };
             Assert.NotEqual(0, Program.Main(args));
+        }
+
+        private string CreateTestFile(string extension)
+        {
+            string fileName = Path.GetRandomFileName();
+            fileName = Path.ChangeExtension(fileName, extension);
+            fileName = Path.Combine(this.workingDirectory, fileName);
+            using (File.CreateText(fileName))
+            {
+            }
+
+            return fileName;
         }
     }
 }

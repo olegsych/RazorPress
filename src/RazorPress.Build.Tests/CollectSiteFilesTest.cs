@@ -47,29 +47,29 @@ namespace RazorPress.Build
         [Fact]
         public void ExecuteCreatesPageObjectWithContentsLoadedFromFileInSubDirectory()
         {
-            this.directory.Create();
-            DirectoryInfo subDirectory = this.directory.CreateSubdirectory("SubDirectory");
+            this.Directory.Create();
+            DirectoryInfo subDirectory = this.Directory.CreateSubdirectory("SubDirectory");
             var file = new FileInfo(Path.Combine(subDirectory.FullName, "about.cshtml"));
-            const string fileContent = "TestContent";
-            File.WriteAllText(file.FullName, fileContent);
+            const string FileContent = "TestContent";
+            File.WriteAllText(file.FullName, FileContent);
             var site = new Site();
 
-            var processor = new CollectSiteFiles { Site = site, Directory = this.directory };
+            var processor = new CollectSiteFiles { Site = site, Directory = this.Directory };
             processor.Execute();
 
-            Assert.Equal(fileContent, site.Pages[0].Content);
+            Assert.Equal(FileContent, site.Pages[0].Content);
         }
 
         [Fact]
         public void ExecuteCreatesPageObjectWithUrlSetToRelativePathToFileFromDirectory()
         {
-            this.directory.Create();
-            DirectoryInfo subdirectory = this.directory.CreateSubdirectory("subdirectory");
+            this.Directory.Create();
+            DirectoryInfo subdirectory = this.Directory.CreateSubdirectory("subdirectory");
             var file = new FileInfo(Path.Combine(subdirectory.FullName, "about.cshtml"));
             file.Create().Dispose();
             var site = new Site();
 
-            var command = new CollectSiteFiles { Site = site, Directory = this.directory };
+            var command = new CollectSiteFiles { Site = site, Directory = this.Directory };
             command.Execute();
 
             Assert.Equal("/subdirectory/about.cshtml", site.Pages[0].Url);

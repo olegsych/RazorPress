@@ -6,7 +6,7 @@
   <PropertyGroup>
     <ProjectGuid>{853C5BC3-BC62-4CEC-8A34-3C9B7332F9F7}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <NuGetPackageImportStamp>a6c8f5fb</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>9aae09c6</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
@@ -61,6 +61,7 @@
     <Compile Include="DiscoverTest.cs" />
     <Compile Include="FileSystemTest.cs" />
     <Compile Include="GenerateSiteTagsTest.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="PrepareTest.cs" />
     <Compile Include="RazorPageCommandTest.cs" />
     <Compile Include="ExecuteRazorPageHeadersTest.cs" />
@@ -94,10 +95,12 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\xunit.core.2.0.0-beta4-build2738\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid\xunit.core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.core.2.0.0-beta4-build2738\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid\xunit.core.props'))" />
+    <Error Condition="!Exists('..\..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets'))" />
   </Target>
 </Project>
