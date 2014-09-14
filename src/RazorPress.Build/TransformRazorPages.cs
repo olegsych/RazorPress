@@ -9,7 +9,7 @@ namespace RazorPress.Build
     public class TransformRazorPages : RazorPageCommand
     {
         /// <summary>
-        /// Transforms <see cref="Page.Content"/> using Razor templating engine.
+        /// Transforms <see cref="Page.Content"/> using Razor template engine.
         /// </summary>
         protected override void Execute(Page page)
         {

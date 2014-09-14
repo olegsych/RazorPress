@@ -1,10 +1,10 @@
-﻿namespace RazorPress.Build
-{
-    using System;
-    using System.Composition.Hosting;
-    using System.IO;
-    using Xunit;
+﻿using System;
+using System.Composition.Hosting;
+using System.IO;
+using Xunit;
 
+namespace RazorPress.Build
+{
     public class CollectSiteFilesTest : FileSystemTest
     {
         [Fact]

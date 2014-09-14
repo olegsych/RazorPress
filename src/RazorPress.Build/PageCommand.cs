@@ -22,7 +22,7 @@ namespace RazorPress.Build
         }
 
         /// <summary>
-        /// Overriden in derived classes to perform command logic for every <see cref="Page"/> of the <see cref="Site"/>.
+        /// Overridden in derived classes to perform command logic for every <see cref="Page"/> of the <see cref="Site"/>.
         /// </summary>
         protected abstract void Execute(Page page);
     }

@@ -1,5 +1,4 @@
-﻿using System.IO;
-using RazorEngine.Templating;
+﻿using RazorEngine.Templating;
 using Xunit;
 
 namespace RazorPress.Build

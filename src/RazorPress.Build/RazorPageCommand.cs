@@ -4,7 +4,7 @@ using RazorEngine.Templating;
 namespace RazorPress.Build
 {
     /// <summary>
-    /// Serves as a base class for page commands that require Razor templating services.
+    /// Serves as a base class for page commands that require Razor template services.
     /// </summary>
     public abstract class RazorPageCommand : PageCommand
     {

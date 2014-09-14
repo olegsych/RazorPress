@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Reflection;
-using RazorEngine.Templating;
 using Xunit;
 
 namespace RazorPress.Build

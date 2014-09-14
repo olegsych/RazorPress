@@ -25,7 +25,7 @@ namespace RazorPress.Build
         {
             if (this.Site == null)
             {
-                throw new InvalidOperationException("Site property must be initalized.");
+                throw new InvalidOperationException("Site property must be initialized.");
             }
         }
     }
