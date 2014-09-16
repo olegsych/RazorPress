@@ -29,7 +29,7 @@ namespace RazorPress
         public string Content 
         {
             get { return this.content; }
-            set { SetProperty(ref this.content, value); }
+            set { Property.Set(ref this.content, value); }
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace RazorPress
         public string[] Tags
         {
             get { return this.tags; }
-            set { SetProperty(ref this.tags, value); }
+            set { Property.Set(ref this.tags, value); }
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace RazorPress
         public string Title 
         {
             get { return this.title; }
-            set { SetProperty(ref this.title, value); }
+            set { Property.Set(ref this.title, value); }
         }
 
         /// <summary>
@@ -79,16 +79,6 @@ namespace RazorPress
 
                 this.url = new Uri(value, UriKind.Relative);
             }
-        }
-
-        private static void SetProperty<T>(ref T field, T value) where T : class
-        {
-            if (value == null)
-            {
-                throw new ArgumentNullException("value");
-            }
-
-            field = value;
         }
     }
 }
