@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Build.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="ReadSiteConfiguration.cs" />
     <Compile Include="SiteCommand.cs" />
     <Compile Include="Discover.cs" />
     <Compile Include="GenerateSiteTags.cs" />
