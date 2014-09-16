@@ -22,7 +22,7 @@ namespace RazorPress.Build
         public void ClassSpecifiesCommandsItDependsOnViaMefBuildAttributes()
         {
             var attribute = typeof(Prepare).GetCustomAttributes(false).OfType<DependsOnAttribute>().Single();
-            Assert.Equal(new[] { typeof(ExecuteRazorPageHeaders), typeof(GenerateSiteTags) }, attribute.DependencyCommandTypes);
+            Assert.Equal(new[] { typeof(ReadRazorPageHeaders), typeof(GenerateSiteTags) }, attribute.DependencyCommandTypes);
         }
     }
 }

@@ -64,7 +64,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="PrepareTest.cs" />
     <Compile Include="RazorPageCommandTest.cs" />
-    <Compile Include="ExecuteRazorPageHeadersTest.cs" />
+    <Compile Include="ReadRazorPageHeadersTest.cs" />
     <Compile Include="SavePagesToDirectoryTest.cs" />
     <Compile Include="DeployTest.cs" />
     <Compile Include="TransformMarkdownPagesTest.cs" />

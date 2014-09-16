@@ -5,18 +5,18 @@ using Xunit;
 
 namespace RazorPress.Build
 {
-    public class ExecuteRazorPageHeadersTest
+    public class ReadRazorPageHeadersTest
     {
         [Fact]
         public void ClassIsPublicForDocumentationAndExtensibility()
         {
-            Assert.True(typeof(ExecuteRazorPageHeaders).IsPublic);
+            Assert.True(typeof(ReadRazorPageHeaders).IsPublic);
         }
 
         [Fact]
         public void ClassInheritsFromRazorPageCommandForCodeReuseAndPolimorphism()
         {
-            Assert.True(typeof(RazorPageCommand).IsAssignableFrom(typeof(ExecuteRazorPageHeaders)));
+            Assert.True(typeof(RazorPageCommand).IsAssignableFrom(typeof(ReadRazorPageHeaders)));
         }
 
         [Fact]
@@ -24,7 +24,7 @@ namespace RazorPress.Build
         {
             var configuration = new ContainerConfiguration().WithAssembly(typeof(SiteCommand).Assembly);
             CompositionHost container = configuration.CreateContainer();
-            var command = container.GetExport<ExecuteRazorPageHeaders>();
+            var command = container.GetExport<ReadRazorPageHeaders>();
             Assert.NotNull(command);
         }
 
@@ -38,7 +38,7 @@ namespace RazorPress.Build
                     this.Page.Title = ""ExpectedValue"";
                 }"
             };
-            var command = new ExecuteRazorPageHeaders();
+            var command = new ReadRazorPageHeaders();
             command.Site = new Site { Pages = { page } };
 
             command.Execute();
@@ -49,13 +49,13 @@ namespace RazorPress.Build
         [Fact]
         public void ExecuteOverridesMethodInheritedFromBaseClassForPolymorphism()
         {
-            Assert.Equal(typeof(Command).GetMethod("Execute"), typeof(ExecuteRazorPageHeaders).GetMethod("Execute").GetBaseDefinition());
+            Assert.Equal(typeof(Command).GetMethod("Execute"), typeof(ReadRazorPageHeaders).GetMethod("Execute").GetBaseDefinition());
         }
 
         [Fact]
         public void ExecuteCallsBaseMethodForConsistentErrorHandling()
         {
-            var command = new ExecuteRazorPageHeaders();
+            var command = new ReadRazorPageHeaders();
             Assert.Throws<InvalidOperationException>(() => command.Execute());
         }
     }
