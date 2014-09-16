@@ -26,7 +26,7 @@ namespace RazorPress.Build
 
             if (this.SourceDirectory == null)
             {
-                throw new InvalidOperationException("SourceDirectory must be initialized.");
+                throw new InvalidOperationException("Source directory must be initialized.");
             }
 
             var directoryUri = new Uri(this.SourceDirectory.FullName + Path.DirectorySeparatorChar);

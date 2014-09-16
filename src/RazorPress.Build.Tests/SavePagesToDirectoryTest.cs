@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Composition;
 using System.Composition.Hosting;
 using System.IO;
 using MefBuild;
@@ -21,12 +22,23 @@ namespace RazorPress.Build
         }
 
         [Fact]
-        public void ClassIsDiscoverableDuringComposition()
+        public void ClassIsDiscoverableViaComposition()
         {
-            var configuration = new ContainerConfiguration().WithAssembly(typeof(SiteCommand).Assembly);
-            CompositionHost container = configuration.CreateContainer();
-            var command = container.GetExport<SavePagesToDirectory>();
+            CompositionContext context = new ContainerConfiguration().WithPart<SavePagesToDirectory>().WithPart<Configuration>().CreateContainer();
+            var command = context.GetExport<SavePagesToDirectory>();
             Assert.NotNull(command);
+        }
+
+        [Fact]
+        public void TargetDirectoryIsImportedFromConfigurationDuringComposition()
+        {
+            CompositionContext context = new ContainerConfiguration().WithPart<SavePagesToDirectory>().WithPart<Configuration>().CreateContainer();
+
+            var configuration = context.GetExport<Configuration>();
+            configuration.TargetDirectory = new DirectoryInfo(Path.GetRandomFileName());
+            var command = context.GetExport<SavePagesToDirectory>();
+
+            Assert.Same(configuration.TargetDirectory, command.TargetDirectory);
         }
 
         [Fact]
@@ -45,7 +57,7 @@ namespace RazorPress.Build
         [Fact]
         public void ExecuteInvokesInheritedMethodForConsistentErrorHandling()
         {
-            var command = new SavePagesToDirectory { Directory = new DirectoryInfo(Path.GetRandomFileName()) };
+            var command = new SavePagesToDirectory { TargetDirectory = new DirectoryInfo(Path.GetRandomFileName()) };
             Assert.Throws<InvalidOperationException>(() => command.Execute());
         }
 
@@ -56,7 +68,7 @@ namespace RazorPress.Build
 
             var page = new Page("/index.html");
             var site = new Site { Pages = { page } };
-            var command = new SavePagesToDirectory { Directory = this.Directory, Site = site };
+            var command = new SavePagesToDirectory { TargetDirectory = this.Directory, Site = site };
 
             command.Execute();
 
@@ -69,7 +81,7 @@ namespace RazorPress.Build
         {
             var page = new Page("/index.html");
             var site = new Site { Pages = { page } };
-            var command = new SavePagesToDirectory { Directory = this.Directory, Site = site };
+            var command = new SavePagesToDirectory { TargetDirectory = this.Directory, Site = site };
 
             command.Execute();
 
@@ -82,7 +94,7 @@ namespace RazorPress.Build
         {
             var page = new Page("/index.html") { Content = "TestValue" };
             var site = new Site { Pages = { page } };
-            var command = new SavePagesToDirectory { Directory = this.Directory, Site = site };
+            var command = new SavePagesToDirectory { TargetDirectory = this.Directory, Site = site };
 
             command.Execute();
 
@@ -95,7 +107,7 @@ namespace RazorPress.Build
         {
             var page = new Page("/subdirectory/index.html") { Content = "TestValue" };
             var site = new Site { Pages = { page } };
-            var command = new SavePagesToDirectory { Directory = this.Directory, Site = site };
+            var command = new SavePagesToDirectory { TargetDirectory = this.Directory, Site = site };
 
             command.Execute();
 

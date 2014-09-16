@@ -52,8 +52,7 @@ namespace RazorPress.Build
         public void ExecuteThrowsInvalidOperationExceptionWhenDirectoryIsNotInitialized()
         {
             var command = new CollectSiteFiles { Site = new Site() };
-            var e = Assert.Throws<InvalidOperationException>(() => command.Execute());
-            Assert.Contains("Directory", e.Message);
+            Assert.Throws<InvalidOperationException>(() => command.Execute());
         }
 
         [Fact]
