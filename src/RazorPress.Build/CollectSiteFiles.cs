@@ -14,7 +14,8 @@ namespace RazorPress.Build
         /// <summary>
         /// Gets or sets the directory with web site source files.
         /// </summary>
-        public DirectoryInfo Directory { get; set; }
+        [Import("Source")]
+        public DirectoryInfo SourceDirectory { get; set; }
 
         /// <summary>
         /// Populates the <see cref="Site"/> with <see cref="Page"/> objects representing files in the source directory of a web site.
@@ -23,13 +24,13 @@ namespace RazorPress.Build
         {
             base.Execute();
 
-            if (this.Directory == null)
+            if (this.SourceDirectory == null)
             {
-                throw new InvalidOperationException("Directory must be initialized.");
+                throw new InvalidOperationException("SourceDirectory must be initialized.");
             }
 
-            var directoryUri = new Uri(this.Directory.FullName + Path.DirectorySeparatorChar);
-            foreach (FileInfo file in this.Directory.GetFiles("*.*", SearchOption.AllDirectories))
+            var directoryUri = new Uri(this.SourceDirectory.FullName + Path.DirectorySeparatorChar);
+            foreach (FileInfo file in this.SourceDirectory.GetFiles("*.*", SearchOption.AllDirectories))
             {
                 var fileUri = new Uri(file.FullName);
                 Uri pageUri = directoryUri.MakeRelativeUri(fileUri);
