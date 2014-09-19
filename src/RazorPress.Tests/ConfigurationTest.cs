@@ -8,81 +8,124 @@ namespace RazorPress
 {
     public class ConfigurationTest
     {
-        [Fact]
-        public void ClassIsPublicForUsersToUseInConfigurationFiles()
+        public class Class
         {
-            Assert.True(typeof(Configuration).IsPublic);
+            [Fact]
+            public void IsPublicForUsersToUseInConfigurationFiles()
+            {
+                Assert.True(typeof(Configuration).IsPublic);
+            }
+
+            [Fact]
+            public void IsExposedViaCompositionAsSingletonForAllConsumersToAccessAndModifySingleConfigurationInstance()
+            {
+                CompositionContext context = new ContainerConfiguration().WithPart<Configuration>().CreateContainer();
+                var first = context.GetExport<Configuration>();
+                var second = context.GetExport<Configuration>();
+                Assert.Same(first, second);
+            }
         }
 
-        [Fact]
-        public void ClassIsExposedViaCompositionAsSingletonForAllConsumersToAccessAndModifySingleConfigurationInstance()
+        public class SourceDirectory
         {
-            CompositionContext context = new ContainerConfiguration().WithPart<Configuration>().CreateContainer();
-            var first = context.GetExport<Configuration>();
-            var second = context.GetExport<Configuration>();
-            Assert.Same(first, second);
+            [Fact]
+            public void IsCurrentDirectoryByDefaultToPreventUsageErrors()
+            {
+                var configuration = new Configuration();
+                DirectoryInfo sourceDirectory = configuration.SourceDirectory;
+                Assert.Equal(Environment.CurrentDirectory, sourceDirectory.FullName);
+            }
+
+            [Fact]
+            public void CanBeChangedByUserInConfigurationFile()
+            {
+                var configuration = new Configuration();
+                var newDirectory = new DirectoryInfo(Path.GetRandomFileName());
+                configuration.SourceDirectory = newDirectory;
+                Assert.Same(newDirectory, configuration.SourceDirectory);
+            }
+
+            [Fact]
+            public void IsAccessibleViaCompositionSoThatCommandsDontHaveToDependOnEntireConfiguration()
+            {
+                CompositionContext context = new ContainerConfiguration().WithPart<Configuration>().CreateContainer();
+                context.GetExport<DirectoryInfo>("Source");
+            }
+
+            [Fact]
+            public void ThrowsArgumentNullExceptionToPreventUsageErrors()
+            {
+                var configuration = new Configuration();
+                Assert.Throws<ArgumentNullException>(() => configuration.SourceDirectory = null);
+            }
         }
 
-        [Fact]
-        public void SourceDirectoryIsCurrentDirectoryByDefaultToPreventUsageErrors()
+        public class TargetDirectory
         {
-            var configuration = new Configuration();
-            DirectoryInfo sourceDirectory = configuration.SourceDirectory;
-            Assert.Equal(Environment.CurrentDirectory, sourceDirectory.FullName);
+            [Fact]
+            public void HasDefaultValueToPreventUsageErrors()
+            {
+                var configuration = new Configuration();
+                DirectoryInfo targetDirectory = configuration.TargetDirectory;
+                Assert.Equal(Path.Combine(Environment.CurrentDirectory, "_site"), targetDirectory.FullName);
+            }
+
+            [Fact]
+            public void CanBeChangedByUserInConfigurationFile()
+            {
+                var configuration = new Configuration();
+                var newDirectory = new DirectoryInfo(Path.GetRandomFileName());
+                configuration.TargetDirectory = newDirectory;
+                Assert.Same(newDirectory, configuration.TargetDirectory);
+            }
+
+            [Fact]
+            public void IsAccessibleViaCompositionSoThatCommandsDontHaveToDependOnEntireConfiguration()
+            {
+                CompositionContext context = new ContainerConfiguration().WithPart<Configuration>().CreateContainer();
+                context.GetExport<DirectoryInfo>("Target");
+            }
+
+            [Fact]
+            public void ThrowsArgumentNullExceptionToPreventUsageErrors()
+            {
+                var configuration = new Configuration();
+                Assert.Throws<ArgumentNullException>(() => configuration.TargetDirectory = null);
+            }
         }
 
-        [Fact]
-        public void SourceDirectoryCanBeChangedByUserInConfigurationFile()
+        public class Update
         {
-            var configuration = new Configuration();
-            var newDirectory = new DirectoryInfo(Path.GetRandomFileName());
-            configuration.SourceDirectory = newDirectory;
-            Assert.Same(newDirectory, configuration.SourceDirectory);
-        }
+            [Fact]
+            public void ThrowsArgumentNullExceptionToPreventUsageErrors()
+            {
+                var configuration = new Configuration();
+                Assert.Throws<ArgumentNullException>(() => configuration.Update(null));
+            }
 
-        [Fact]
-        public void SourceDirectoryIsAccessibleViaCompositionSoThatCommandsDontHaveToDependOnEntireConfiguration()
-        {
-            CompositionContext context = new ContainerConfiguration().WithPart<Configuration>().CreateContainer();
-            context.GetExport<DirectoryInfo>("Source");
-        }
+            [Fact]
+            public void UpdatesSourceDirectory()
+            {
+                var testDirectory = new DirectoryInfo("TestDirectory");
+                var source = new Configuration { SourceDirectory = testDirectory };
+                var target = new Configuration();
 
-        [Fact]
-        public void SourceDirectoryThrowsArgumentNullExceptionToPreventUsageErrors()
-        {
-            var configuration = new Configuration();
-            Assert.Throws<ArgumentNullException>(() => configuration.SourceDirectory = null);
-        }
+                source.Update(target);
 
-        [Fact]
-        public void TargetDirectoryHasDefaultValueToPreventUsageErrors()
-        {
-            var configuration = new Configuration();
-            DirectoryInfo targetDirectory = configuration.TargetDirectory;
-            Assert.Equal(Path.Combine(Environment.CurrentDirectory, "_site"), targetDirectory.FullName);
-        }
+                Assert.Same(testDirectory, target.SourceDirectory);
+            }
 
-        [Fact]
-        public void TargetDirectoryCanBeChangedByUserInConfigurationFile()
-        {
-            var configuration = new Configuration();
-            var newDirectory = new DirectoryInfo(Path.GetRandomFileName());
-            configuration.TargetDirectory = newDirectory;
-            Assert.Same(newDirectory, configuration.TargetDirectory);
-        }
+            [Fact]
+            public void UpdatesTargetDirectory()
+            {
+                var testDirectory = new DirectoryInfo("TestDirectory");
+                var source = new Configuration { TargetDirectory = testDirectory };
+                var target = new Configuration();
 
-        [Fact]
-        public void TargetDirectoryIsAccessibleViaCompositionSoThatCommandsDontHaveToDependOnEntireConfiguration()
-        {
-            CompositionContext context = new ContainerConfiguration().WithPart<Configuration>().CreateContainer();
-            context.GetExport<DirectoryInfo>("Target");
-        }
+                source.Update(target);
 
-        [Fact]
-        public void TargetDirectoryThrowsArgumentNullExceptionToPreventUsageErrors()
-        {
-            var configuration = new Configuration();
-            Assert.Throws<ArgumentNullException>(() => configuration.TargetDirectory = null);
+                Assert.Same(testDirectory, target.TargetDirectory);
+            }
         }
     }
 }

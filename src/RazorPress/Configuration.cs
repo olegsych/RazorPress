@@ -43,5 +43,19 @@ namespace RazorPress
             get { return this.targetDirectory; }
             set { Property.Set(ref this.targetDirectory, value); }
         }
+
+        /// <summary>
+        /// Sets properties of the <paramref name="target"/> instance.
+        /// </summary>
+        public void Update(Configuration target)
+        {
+            if (target == null)
+            {
+                throw new ArgumentNullException("target");
+            }
+
+            target.SourceDirectory = this.SourceDirectory;
+            target.TargetDirectory = this.TargetDirectory;
+        }
     }
 }

@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(false)]
 [assembly: ComVisible(false)]
 
+[assembly: InternalsVisibleTo("RazorPress.Build")]
 [assembly: InternalsVisibleTo("RazorPress.Console")]
 [assembly: InternalsVisibleTo("RazorPress.Build.Tests")]
 [assembly: InternalsVisibleTo("RazorPress.Tests")]

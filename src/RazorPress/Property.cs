@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 
 namespace RazorPress
 {
@@ -12,6 +13,14 @@ namespace RazorPress
             }
 
             field = value;
+        }
+
+        public static void Require<T>(T value, string propertyName) where T : class
+        {
+            if (value == null)
+            {
+                throw new InvalidOperationException(propertyName + " must be initialized.");
+            }
         }
     }
 }
