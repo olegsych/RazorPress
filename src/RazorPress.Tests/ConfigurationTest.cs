@@ -67,7 +67,7 @@ namespace RazorPress
             {
                 var configuration = new Configuration();
                 DirectoryInfo targetDirectory = configuration.TargetDirectory;
-                Assert.Equal(Path.Combine(Environment.CurrentDirectory, "_site"), targetDirectory.FullName);
+                Assert.Equal(Path.Combine(Environment.CurrentDirectory, ".razor"), targetDirectory.FullName);
             }
 
             [Fact]

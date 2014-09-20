@@ -21,7 +21,7 @@ namespace RazorPress
         public Configuration()
         {
             this.sourceDirectory = new DirectoryInfo(".");
-            this.targetDirectory = new DirectoryInfo(".\\_site");
+            this.targetDirectory = new DirectoryInfo(".\\.razor");
         }
 
         /// <summary>
